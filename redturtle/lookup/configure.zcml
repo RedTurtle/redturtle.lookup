@@ -1,0 +1,14 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="redturtle.lookup">
+
+  <browser:page
+    name="lookup"
+    for="OFS.interfaces.IApplication"
+    permission="zope2.ViewManagementScreens"
+    class=".browser.Lookup"
+    template="lookup.pt"
+    allowed_interface=".interfaces.ILookup"
+    />
+
+</configure>

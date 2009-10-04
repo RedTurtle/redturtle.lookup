@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+  <title>plone.reload</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <tal:sites tal:repeat="site view/sites">
+        <h2 tal:content="site/title" />
+        [ <a href="" tal:attributes="href site/absolute_url" tal:content="site/id">site</a>
+        | <a href="" tal:attributes="href string:${site/absolute_url}/manage">zmi</a>
+        | <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel">control panel</a>
+        | <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form">products</a>
+        ]
+        <table>
+        <tr>
+           <th>Id</th>
+           <th>Installed Version</th>
+           <th>Title</th>
+           <th>Status</th>
+        </tr>
+        <tr tal:repeat="prod site/portal_quickinstaller/listInstalledProducts">
+           <td tal:content="prod/id" />
+           <td tal:content="prod/installedVersion" />
+           <td tal:content="prod/title" />
+           <td tal:content="prod/status" />
+        </tr>
+        </table>
+    <hr />
+    </tal:sites>
+</body>
+</html>
