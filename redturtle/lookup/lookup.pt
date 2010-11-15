@@ -3,32 +3,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal">
 <head>
-  <title>plone.reload</title>
+  <title tal:content="context/title">@@lookup</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css" type="text/css" media="all" /> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script> 
 </head>
 <body>
-    <tal:sites tal:repeat="site view/sites">
-        <h2 tal:content="site/title" />
-        [ <a href="" tal:attributes="href site/absolute_url" tal:content="site/id">site</a>
-        | <a href="" tal:attributes="href string:${site/absolute_url}/manage">zmi</a>
-        | <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel">control panel</a>
-        | <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form">products</a>
-        ]
-        <table>
-        <tr>
-           <th>Id</th>
-           <th>Installed Version</th>
-           <th>Title</th>
-           <th>Status</th>
-        </tr>
-        <tr tal:repeat="prod site/portal_quickinstaller/listInstalledProducts">
-           <td tal:content="prod/id" />
-           <td tal:content="prod/installedVersion" />
-           <td tal:content="prod/title" />
-           <td tal:content="prod/status" />
-        </tr>
-        </table>
-    <hr />
-    </tal:sites>
+    <div id="accordion">
+        <tal:site tal:repeat="site view/sites">
+            <h3><a href="#" tal:content="site/title">site name</a></h3>
+            <div>
+                [ <a href="" tal:attributes="href site/absolute_url" tal:content="site/id">site</a>
+                | <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel">control panel</a>
+                | <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form">products</a>
+                | <a href="" tal:attributes="href string:${site/absolute_url}/manage">zmi</a>
+                <tal:pm tal:define="pm site/portal_migration|nothing" tal:condition="pm">
+                  <a href="#" tal:attributes="href string:${site/absolute_url}/portal_migration/manage_migrate"><img
+                        tal:repeat="icon python:pm.om_icons()[1:]" tal:attributes="src icon/path; title icon/title; alt icon/alt" /></a>
+                </tal:pm>
+                ]
+                <table width="100%">
+                    <tr>
+                       <th>Id</th>
+                       <th>Installed Version</th>
+                       <th>Title</th>
+                       <th>Status</th>
+                    </tr>
+                    <tr tal:repeat="prod site/portal_quickinstaller/listInstalledProducts">
+                       <td tal:content="prod/id" />
+                       <td tal:content="prod/installedVersion" />
+                       <td tal:content="prod/title" />
+                       <td tal:content="prod/status" />
+                    </tr>
+                </table>
+            </div>
+        </tal:site>
+    </div>
 </body>
+<script>
+	$(function() {
+		$( "#accordion" ).accordion({active: false, collapsible: true, autoHeight: false});
+                $( ".preview" ).dialog({ disabled: true, autoOpen: false });
+	});
+</script>
 </html>
