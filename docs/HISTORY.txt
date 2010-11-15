@@ -4,6 +4,7 @@ Changelog
 1.0.1 - (Unreleased)
 --------------------
 
+* zelenium tests [mauro]
 * jquery accordion [mauro]
 
 1.0 - (2010/03/05)

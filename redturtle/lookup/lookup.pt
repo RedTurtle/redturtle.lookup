@@ -10,19 +10,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script> 
 </head>
 <body>
+    <div class="toolbar ui-widget-header ui-corner-all">
+        <tal:actions tal:repeat="zuite view/zelenium_suites">
+            <a class="action" target="_blank" tal:attributes="href zuite/absolute_url"
+               tal:content="zuite/getTitle|zuite/getId">Zelenium suite</a>
+        </tal:actions>
+    </div>
     <div id="accordion">
         <tal:site tal:repeat="site view/sites">
-            <h3><a href="#" tal:content="site/title">site name</a></h3>
+            <h3><a href="#" tal:content="string:${site/title} (${site/id})">site</a></h3>
             <div>
-                [ <a href="" tal:attributes="href site/absolute_url" tal:content="site/id">site</a>
-                | <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel">control panel</a>
-                | <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form">products</a>
-                | <a href="" tal:attributes="href string:${site/absolute_url}/manage">zmi</a>
+                <div class="toolbar ui-widget-header ui-corner-all">
+                <a href="" tal:attributes="href site/absolute_url" target="_blank">View</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel" target="_blank">control panel</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form" target="_blank">products</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/manage" target="_blank">zmi</a>
                 <tal:pm tal:define="pm site/portal_migration|nothing" tal:condition="pm">
-                  <a href="#" tal:attributes="href string:${site/absolute_url}/portal_migration/manage_migrate"><img
+                  <a href="#" tal:attributes="href string:${site/absolute_url}/portal_migration/manage_migrate" target="_blank"><img
                         tal:repeat="icon python:pm.om_icons()[1:]" tal:attributes="src icon/path; title icon/title; alt icon/alt" /></a>
                 </tal:pm>
-                ]
+                </div>
                 <table width="100%">
                     <tr>
                        <th>Id</th>
@@ -45,6 +52,7 @@
 	$(function() {
 		$( "#accordion" ).accordion({active: false, collapsible: true, autoHeight: false});
                 $( ".preview" ).dialog({ disabled: true, autoOpen: false });
+                $( ".toolbar a" ).button();
 	});
 </script>
 </html>
