@@ -4,6 +4,7 @@ Changelog
 1.0.1 - (Unreleased)
 --------------------
 
+* anonymous users [mauro]
 * zelenium tests [mauro]
 * jquery accordion [mauro]
 
