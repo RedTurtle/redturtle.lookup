@@ -16,10 +16,11 @@
                tal:content="zuite/getTitle|zuite/getId">Zelenium suite</a>
         </tal:actions>
     </div>
-    <tal:site tal:repeat="site view/sites" tal:condition="here/portal_membership/isAnonymousUser">
+    <h1 tal:content="user" />
+    <tal:site tal:repeat="site view/sites" tal:condition="python:user=='Anonymous User'">
         <h3><a href="" tal:attributes="href site/absolute_url" target="_blank" tal:content="string:${site/title} (${site/id})">site</a></h3>
     </tal:site>
-    <div id="accordion" tal:condition="not: here/portal_membership/isAnonymousUser">
+    <div id="accordion" tal:condition="python:user!='Anonymous User'">
         <tal:site tal:repeat="site view/sites">
             <h3><a href="#" tal:content="string:${site/title} (${site/id})">site</a></h3>
             <div>
