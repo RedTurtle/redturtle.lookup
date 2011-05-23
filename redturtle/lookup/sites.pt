@@ -1,0 +1,2 @@
+<tal:sites tal:repeat="site view/sites"><tal:site content="string:${site/absolute_url};${site/title}">site</tal:site>
+</tal:sites>

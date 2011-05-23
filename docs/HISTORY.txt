@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.0.1 - (Unreleased)
+1.0.1 - (2011/05/23)
 --------------------
 
+* sites [mauro]
 * anonymous users [mauro]
 * zelenium tests [mauro]
 * jquery accordion [mauro]

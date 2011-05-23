@@ -11,4 +11,13 @@
     allowed_interface=".interfaces.ILookup"
     />
 
+  <browser:page
+    name="lookup.sites"
+    for="OFS.interfaces.IApplication"
+    permission="zope2.View"
+    class=".browser.Lookup"
+    template="sites.pt"
+    allowed_interface=".interfaces.ILookup"
+    />
+
 </configure>
