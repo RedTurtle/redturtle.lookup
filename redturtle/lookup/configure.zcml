@@ -5,7 +5,7 @@
   <browser:page
     name="lookup"
     for="OFS.interfaces.IApplication"
-    permission="zope2.View"
+    permission="zope2.ViewManagementScreens"
     class=".browser.Lookup"
     template="lookup.pt"
     allowed_interface=".interfaces.ILookup"
