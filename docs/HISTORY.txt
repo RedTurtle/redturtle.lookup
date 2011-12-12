@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.2 (Unreleased)
+------------------
+
+* fix https://code.redturtle.it/pm/p/er--portale/ticket/271 [mauro]
+
 1.0.1 (2011/05/23)
 --------------------
 

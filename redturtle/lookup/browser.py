@@ -20,8 +20,10 @@ class Lookup(BrowserView):
         self.message = None
 
     def sites(self):
-        for obj in self.context.values():
-            if IPloneSiteRoot.providedBy(obj):
+        keys = sorted(self.context.keys())
+        for key in keys:
+            obj = self.context.get(key)
+            if obj and IPloneSiteRoot.providedBy(obj):
                 yield obj
 
     def zelenium_suites(self):

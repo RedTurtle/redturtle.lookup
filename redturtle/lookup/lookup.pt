@@ -18,17 +18,18 @@
     </div>
     <h1 tal:content="user" />
     <tal:site tal:repeat="site view/sites" tal:condition="python:user=='Anonymous User'">
-        <h3><a href="" tal:attributes="href site/absolute_url" target="_blank" tal:content="string:${site/title} (${site/id})">site</a></h3>
+        <h3><a href="" tal:attributes="href site/absolute_url" target="_blank" tal:content="string:${site/id} - ${site/title}">site</a></h3>
     </tal:site>
     <div id="accordion" tal:condition="python:user!='Anonymous User'">
         <tal:site tal:repeat="site view/sites">
-            <h3><a href="#" tal:content="string:${site/title} (${site/id})">site</a></h3>
+            <h3><a href="#" tal:content="string:${site/id} - ${site/title}">site</a></h3>
             <div>
                 <div class="toolbar ui-widget-header ui-corner-all">
                 <a href="" tal:attributes="href site/absolute_url" target="_blank">View</a>
                 <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel" target="_blank">control panel</a>
                 <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form" target="_blank">products</a>
                 <a href="" tal:attributes="href string:${site/absolute_url}/manage" target="_blank">zmi</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_users_overview" target="_blank">Users and groups</a>
                 <tal:pm tal:define="pm site/portal_migration|nothing" tal:condition="pm">
                   <a href="#" tal:attributes="href string:${site/absolute_url}/portal_migration/manage_migrate" target="_blank"><img
                         tal:repeat="icon python:pm.om_icons()[1:]" tal:attributes="src icon/path; title icon/title; alt icon/alt" /></a>
