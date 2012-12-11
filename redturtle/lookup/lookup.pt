@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+	  i18n:domain="redturtle.lookup">
 <head>
   <title tal:content="context/title">@@lookup</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,30 +19,40 @@
         </tal:actions>
     </div>
     <h1 tal:content="user" />
-    <tal:site tal:repeat="site view/sites" tal:condition="python:user=='Anonymous User'">
-        <h3><a href="" tal:attributes="href site/absolute_url" target="_blank" tal:content="string:${site/id} - ${site/title}">site</a></h3>
-    </tal:site>
-    <div id="accordion" tal:condition="python:user!='Anonymous User'">
+    <div id="accordion">
         <tal:site tal:repeat="site view/sites">
-            <h3><a href="#" tal:content="string:${site/id} - ${site/title}">site</a></h3>
+            <h3 tal:define="pm site/portal_migration|nothing"><a href="#">
+			  <span tal:replace="string:${site/id} - ${site/title}" />
+              <img tal:condition="pm/needUpgrading" alt="Need upgrade" title="Need upgrade"
+                   tal:attributes="src string:${site/absolute_url}/error_icon.png"
+				   i18n:attributes="title;alt" />
+            </a>
+			</h3>
             <div>
                 <div class="toolbar ui-widget-header ui-corner-all">
-                <a href="" tal:attributes="href site/absolute_url" target="_blank">View</a>
-                <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel" target="_blank">control panel</a>
-                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form" target="_blank">products</a>
-                <a href="" tal:attributes="href string:${site/absolute_url}/manage" target="_blank">zmi</a>
-                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_users_overview" target="_blank">Users and groups</a>
-                <tal:pm tal:define="pm site/portal_migration|nothing" tal:condition="pm">
-                  <a href="#" tal:attributes="href string:${site/absolute_url}/portal_migration/manage_migrate" target="_blank"><img
-                        tal:repeat="icon python:pm.om_icons()[1:]" tal:attributes="src icon/path; title icon/title; alt icon/alt" /></a>
-                </tal:pm>
+                <a href="" tal:attributes="href site/absolute_url" target="_blank" i18n:translate="">View</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/plone_control_panel" target="_blank" i18n:translate="">Control panel</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_install_products_form" target="_blank" i18n:translate="">Products</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/manage" target="_blank" i18n:translate="">ZMI</a>
+                <a href="" tal:attributes="href string:${site/absolute_url}/prefs_users_overview" target="_blank" i18n:translate="">Users and groups</a>
+                <a tal:define="pm site/portal_migration|nothing"
+				   tal:attributes="href string:${site/absolute_url}/@@plone-upgrade"
+				   tal:condition="pm" target="_blank">
+                      <span tal:omit-tag="" i18n:translate="">Migration</span>
+                      <img tal:condition="pm/needUpgrading" alt="Need upgrade" title="Need upgrade"
+                           tal:attributes="src string:${site/absolute_url}/error_icon.png"
+						   i18n:attributes="title;alt" />
+                      <img tal:condition="not:pm/needUpgrading" alt="Site upgraded" title="Site upgraded"
+                           tal:attributes="src string:${site/absolute_url}/confirm_icon.png"
+						   i18n:attributes="title;alt" />
+                </a>
                 </div>
                 <table width="100%">
                     <tr>
-                       <th>Id</th>
-                       <th>Installed Version</th>
-                       <th>Title</th>
-                       <th>Status</th>
+                       <th i18n:translate="">Id</th>
+                       <th i18n:translate="">Installed Version</th>
+                       <th i18n:translate="">Title</th>
+                       <th i18n:translate="">Status</th>
                     </tr>
                     <tr tal:repeat="prod site/portal_quickinstaller/listInstalledProducts">
                        <td tal:content="prod/id" />
@@ -54,10 +66,10 @@
     </div>
 </body>
 <script>
-	$(function() {
-		$( "#accordion" ).accordion({active: false, collapsible: true, autoHeight: false});
+    $(function() {
+        $( "#accordion" ).accordion({active: false, collapsible: true, autoHeight: false});
                 $( ".preview" ).dialog({ disabled: true, autoOpen: false });
                 $( ".toolbar a" ).button();
-	});
+    });
 </script>
 </html>

@@ -1,0 +1,67 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-12-11 11:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: redturtle.lookup\n"
+
+#: ../lookup.pt:34
+msgid "Control panel"
+msgstr ""
+
+#: ../lookup.pt:52
+msgid "Id"
+msgstr ""
+
+#: ../lookup.pt:53
+msgid "Installed Version"
+msgstr ""
+
+#: ../lookup.pt:41
+msgid "Migration"
+msgstr ""
+
+#: ../lookup.pt:26
+msgid "Need upgrade"
+msgstr ""
+
+#: ../lookup.pt:35
+msgid "Products"
+msgstr ""
+
+#: ../lookup.pt:45
+msgid "Site upgraded"
+msgstr ""
+
+#: ../lookup.pt:55
+msgid "Status"
+msgstr ""
+
+#: ../lookup.pt:54
+msgid "Title"
+msgstr ""
+
+#: ../lookup.pt:37
+msgid "Users and groups"
+msgstr ""
+
+#: ../lookup.pt:33
+msgid "View"
+msgstr ""
+
+#: ../lookup.pt:36
+msgid "ZMI"
+msgstr ""
+

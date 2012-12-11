@@ -1,16 +1,17 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1.dev0'
+version = '2.0.dev0'
 
 setup(name='redturtle.lookup',
       version=version,
-      description="List Plone sites ... and more",
+      description="List general information about Plone sites in a single instance",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 4.2",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
@@ -25,7 +26,7 @@ setup(name='redturtle.lookup',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'Products.CMFPlone>4.0b1',
       ],
       entry_points="""
       # -*- Entry points: -*-

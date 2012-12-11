@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-12-11 11:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ../lookup.pt:34
+msgid "Control panel"
+msgstr "Pannello di controllo"
+
+#: ../lookup.pt:52
+msgid "Id"
+msgstr ""
+
+#: ../lookup.pt:53
+msgid "Installed Version"
+msgstr "Versioni installate"
+
+#: ../lookup.pt:41
+msgid "Migration"
+msgstr "Migrazione"
+
+#: ../lookup.pt:26
+msgid "Need upgrade"
+msgstr "Necessita aggiornamento"
+
+#: ../lookup.pt:35
+msgid "Products"
+msgstr "Prodotti"
+
+#: ../lookup.pt:45
+msgid "Site upgraded"
+msgstr "Sito aggiornato"
+
+#: ../lookup.pt:55
+msgid "Status"
+msgstr "Stato"
+
+#: ../lookup.pt:54
+msgid "Title"
+msgstr "Titolo"
+
+#: ../lookup.pt:37
+msgid "Users and groups"
+msgstr "Utenti e gruppi"
+
+#: ../lookup.pt:33
+msgid "View"
+msgstr "Vedi"
+
+#: ../lookup.pt:36
+msgid "ZMI"
+msgstr ""
+

@@ -1,12 +1,17 @@
 Changelog
 =========
 
-1.1 (unreleased)
+2.0 (unreleased)
 ----------------
+
+Plone 4 compatible version
 
 * z3c.autoinclude support [keul]
 * egg cleanup [keul]
-* fixed permission for ``@@lookup.sites`` [keul] 
+* fixed permission for ``@@lookup.sites`` [keul]
+* display a warning icon if a site needs to be upgraded [keul]
+* ``@@lookup.sites`` now properly displayed [keul]
+* i18n support [keul]
 
 1.0.2 (Unreleased)
 ------------------

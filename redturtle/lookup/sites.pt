@@ -1,2 +1,6 @@
-<tal:sites tal:repeat="site view/sites"><tal:site content="string:${site/absolute_url};${site/title}">site</tal:site>
-</tal:sites>
+<ul xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <li tal:repeat="site view/sites">
+	    <a tal:attributes="href site/absolute_url"
+	       tal:content="site/absolute_url"></a> <span tal:replace="site/title" />
+    </li>
+</ul>
