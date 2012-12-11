@@ -24,4 +24,3 @@ This product was developed by RedTurtle Technology team.
    :alt: RedTurtle Technology Site
    :target: http://www.redturtle.it/
 
-   
