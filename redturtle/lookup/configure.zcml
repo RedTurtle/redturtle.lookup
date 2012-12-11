@@ -14,7 +14,7 @@
   <browser:page
     name="lookup.sites"
     for="OFS.interfaces.IApplication"
-    permission="zope2.View"
+    permission="zope2.ViewManagementScreens"
     class=".browser.Lookup"
     template="sites.pt"
     allowed_interface=".interfaces.ILookup"

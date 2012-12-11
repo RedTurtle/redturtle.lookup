@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0.1'
+version = '1.1.dev0'
 
 setup(name='redturtle.lookup',
       version=version,
-      description="List plone sites ... and more",
+      description="List Plone sites ... and more",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -16,8 +16,8 @@ setup(name='redturtle.lookup',
         ],
       keywords='',
       author='RedTurtle',
-      author_email='info@redturtle.net',
-      url='http://www.redturtle.net',
+      author_email='sviluppoplone@redturtle.it',
+      url='redturtle.lookup = svn https://code.redturtle.it/svn/redturtle/redturtle.lookup/trunk',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['redturtle'],
@@ -29,12 +29,7 @@ setup(name='redturtle.lookup',
       ],
       entry_points="""
       # -*- Entry points: -*-
-
-      [distutils.setup_keywords]
-      paster_plugins = setuptools.dist:assert_string_list
-
-      [egg_info.writers]
-      paster_plugins.txt = setuptools.command.egg_info:write_arg
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
-      paster_plugins = ["ZopeSkel"],
       )

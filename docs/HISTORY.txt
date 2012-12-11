@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1 (unreleased)
+----------------
+
+* z3c.autoinclude support [keul]
+* egg cleanup [keul]
+* fixed permission for ``@@lookup.sites`` [keul] 
+
 1.0.2 (Unreleased)
 ------------------
 
