@@ -22,7 +22,8 @@
                          products python:results.get('products');">
         <tr>
           <th i18n:translate="product_label">Product</th>
-          <th tal:repeat="site sites">
+          <th tal:repeat="site sites"
+              class="site">
               <div tal:content="site/getId"
                     class="siteId"/>
           </th>
