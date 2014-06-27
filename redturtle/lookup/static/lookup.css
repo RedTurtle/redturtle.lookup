@@ -19,3 +19,9 @@ a.productAction.loading .glyphicon-refresh {
     from { transform: scale( 1 ) rotate( 0deg );   }
     to   { transform: scale( 1 ) rotate( 360deg ); }
 }
+
+.siteId {
+  transform: rotate(63deg);
+  transform-origin: left top 0;
+  min-height: 55px;
+}
