@@ -68,7 +68,10 @@ class LookupProductsView(BrowserView):
         if not qi.isProductInstalled(product_id):
             res_dict['status'] = "notInstalled"
         else:
-            upgrade_info = qi.upgradeInfo(product_id)
+            try:
+                upgrade_info = qi.upgradeInfo(product_id)
+            except Exception as e:
+                return res_dict
             res_dict['installed_version'] = upgrade_info.get('installedVersion')
             res_dict['new_version'] = upgrade_info.get('newVersion')
             if upgrade_info.get('available') and upgrade_info.get('required'):

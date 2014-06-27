@@ -27,6 +27,7 @@ setup(name='redturtle.lookup',
       install_requires=[
           'setuptools',
           'Products.CMFPlone>4.0b1',
+          'pkginfo'
       ],
       entry_points="""
       # -*- Entry points: -*-
