@@ -15,7 +15,7 @@
   <link href="++resource++redturtle.lookup.static/lookup.css" rel="stylesheet">
 </head>
 <body tal:define="results view/sites_infos">
-    <div class="container">
+    <div class="container-fluid">
       <h1 i18n:translate="lookup_title">Sites lookup</h1>
       <table class="table table-condensed"
              tal:define="sites python:results.get('sites');
@@ -23,7 +23,13 @@
         <tr>
           <th i18n:translate="product_label">Product</th>
           <th tal:repeat="site sites">
-              <span tal:content="site/getId"/>
+              <div tal:content="site/getId"
+                    class="siteId"/>
+          </th>
+        </tr>
+        <tr>
+          <td></td>
+          <td tal:repeat="site sites">
               <button class="btn btn-sm btn-info siteActions"
                       data-placement="bottom"
                       data-toggle="popover"
@@ -34,7 +40,7 @@
                       tal:attributes="data-portal-url site/portal_url">
                   <i class="glyphicon glyphicon-info-sign"></i>
               </button>
-          </th>
+          </td>
         </tr>
         <tr tal:repeat="product products">
           <td>

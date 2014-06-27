@@ -10,24 +10,6 @@
     name="lookup"
     for="OFS.interfaces.IApplication"
     permission="zope2.ViewManagementScreens"
-    class=".browser.Lookup"
-    template="lookup.pt"
-    allowed_interface=".interfaces.ILookup"
-    />
-
-  <browser:page
-    name="lookup.sites"
-    for="OFS.interfaces.IApplication"
-    permission="zope2.ViewManagementScreens"
-    class=".browser.Lookup"
-    template="sites.pt"
-    allowed_interface=".interfaces.ILookup"
-    />
-
-  <browser:page
-    name="lookup-products"
-    for="OFS.interfaces.IApplication"
-    permission="zope2.ViewManagementScreens"
     class=".browser.LookupProductsView"
     template="lookup_products.pt"
     allowed_interface=".interfaces.ILookupProducts"
