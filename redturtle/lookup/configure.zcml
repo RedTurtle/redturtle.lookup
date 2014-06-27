@@ -24,4 +24,33 @@
     allowed_interface=".interfaces.ILookup"
     />
 
+  <browser:page
+    name="lookup-products"
+    for="OFS.interfaces.IApplication"
+    permission="zope2.ViewManagementScreens"
+    class=".browser.LookupProductsView"
+    template="lookup_products.pt"
+    allowed_interface=".interfaces.ILookupProducts"
+    />
+  
+  <browser:page
+    name="handle-products"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".browser.HandleProductsView"
+    allowed_interface=".interfaces.IHandleProducts"
+    />
+
+  <browser:page
+    name="product-info"
+    for="OFS.interfaces.IApplication"
+    permission="zope2.ViewManagementScreens"
+    class=".browser.ProductInfoView"
+    template="product-info.pt"
+    />
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+      name="redturtle.lookup.static"
+      directory="static"
+      />
 </configure>

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-12-11 11:21+0000\n"
+"POT-Creation-Date: 2014-06-27 09:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,5 +63,45 @@ msgstr ""
 
 #: ../lookup.pt:36
 msgid "ZMI"
+msgstr ""
+
+#. Default: "Go back"
+#: ../product-info.pt:25
+msgid "go_back_label"
+msgstr ""
+
+#. Default: "Install"
+#: ../lookup_products.pt:55
+msgid "install_label"
+msgstr ""
+
+#. Default: "Sites lookup"
+#: ../lookup_products.pt:19
+msgid "lookup_title"
+msgstr ""
+
+#. Default: "An error occurred during installation of ${product} on site ${site}. Please check the log."
+#: ../browser.py:104
+msgid "msg_error_install"
+msgstr ""
+
+#. Default: "An error occurred during upgrade of ${product} on site ${site}. Please check the log."
+#: ../browser.py:126
+msgid "msg_error_upgrade"
+msgstr ""
+
+#. Default: "Upgrade"
+#: ../lookup_products.pt:60
+msgid "upgrade_label"
+msgstr ""
+
+#. Default: "Url:"
+#: ../product-info.pt:37
+msgid "url_label"
+msgstr ""
+
+#. Default: "Version:"
+#: ../product-info.pt:33
+msgid "version_label"
 msgstr ""
 
