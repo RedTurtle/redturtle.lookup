@@ -7,6 +7,8 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 import json
 from pkginfo import Installed
 from redturtle.lookup import lookupMessageFactory as _
+from zope.i18n import translate
+import logging
 
 
 class LookupProductsView(BrowserView):
@@ -67,45 +69,70 @@ class HandleProductsView(BrowserView):
             result = self.upgrade(product_id)
         if action == 'install':
             result = self.install(product_id)
+        if action == 'uninstall':
+            result = self.uninstall(product_id)
         return result
 
     def install(self, pid):
         """ Install a product in a Plone site """
         qi = getToolByName(self.context, 'portal_quickinstaller')
-        error_msg = _("msg_error_install",
-                      default=u"An error occurred during installation of ${product} on site ${site}. Please check the log.",
-                      mapping={'product': pid,
-                               'site': self.context.getId()})
+        error_msg = translate(_("msg_error_install",
+                              default=u"An error occurred during installation of ${product} on site ${site}. Please check the log.",
+                              mapping={'product': pid,
+                                       'site': self.context.getId()}),
+                             context=self.request)
         try:
             result = qi.installProduct(pid)
             if not result:
-                return json.dumps({'result': 'ok'})
+                return json.dumps({'result': 'ok',
+                                   'new_state': 'installed'})
             else:
                 return json.dumps({'msg': result,
                                    'result': 'nok'})
         except Exception:
-
+            logging.exception("Error in install step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 
-    def uninstall(self, pid, site):
+    def uninstall(self, pid):
         """ Uninstall a product in a Plone site """
-
-    def upgrade(self, pid):
-        """ Upgrade a product in a Plone site """
         qi = getToolByName(self.context, 'portal_quickinstaller')
-        error_msg = _("msg_error_upgrade",
-                      default=u"An error occurred during upgrade of ${product} on site ${site}. Please check the log.",
+        error_msg = translate(_("msg_error_uninstall",
+                      default=u"An error occurred during uninstall of ${product} on site ${site}. Please check the log.",
                       mapping={'product': pid,
-                               'site': self.context.getId()})
+                               'site': self.context.getId()}),
+                            context=self.request)
         try:
-            result = qi.upgradeProduct(pid)
+            result = qi.uninstallProducts([pid])
             if not result:
-                return json.dumps({'result': 'ok'})
+                return json.dumps({'result': 'ok',
+                                    'new_state': 'uninstalled'})
             else:
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
         except Exception:
+            logging.exception("Error in uninstall step")
+            return json.dumps({'msg': error_msg,
+                               'result': 'nok'})
+
+    def upgrade(self, pid):
+        """ Upgrade a product in a Plone site """
+        qi = getToolByName(self.context, 'portal_quickinstaller')
+        error_msg = translate(_("msg_error_upgrade",
+                              default=u"An error occurred during upgrade of ${product} on site ${site}. Please check the log.",
+                              mapping={'product': pid,
+                                       'site': self.context.getId()}),
+                            context=self.request)
+        try:
+            result = qi.upgradeProduct(pid)
+            if not result:
+                return json.dumps({'result': 'ok',
+                                    'new_state': 'installed'})
+            else:
+                return json.dumps({'msg': error_msg,
+                                   'result': 'nok'})
+        except Exception:
+            logging.exception("Error in upgrade step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 

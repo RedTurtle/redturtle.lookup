@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-06-27 09:48+0000\n"
+"POT-Creation-Date: 2014-06-28 13:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,11 @@ msgstr "Pannello di controllo"
 
 #: ../lookup.pt:52
 msgid "Id"
-msgstr ""
+msgstr "Id"
+
+#: ../lookup_products.pt:59
+msgid "Install"
+msgstr "Installa"
 
 #: ../lookup.pt:53
 msgid "Installed Version"
@@ -50,6 +54,10 @@ msgstr "Stato"
 msgid "Title"
 msgstr "Titolo"
 
+#: ../lookup_products.pt:59
+msgid "Uninstall"
+msgstr "Disinstalla"
+
 #: ../lookup.pt:37
 msgid "Users and groups"
 msgstr "Utenti e gruppi"
@@ -60,7 +68,7 @@ msgstr "Vedi"
 
 #: ../lookup.pt:36
 msgid "ZMI"
-msgstr ""
+msgstr "ZMI"
 
 #. Default: "Go back"
 #: ../product-info.pt:25
@@ -68,7 +76,7 @@ msgid "go_back_label"
 msgstr "Torna indietro"
 
 #. Default: "Install"
-#: ../lookup_products.pt:55
+#: ../lookup_products.pt:70
 msgid "install_label"
 msgstr "Installa"
 
@@ -78,17 +86,32 @@ msgid "lookup_title"
 msgstr "Gestione portali"
 
 #. Default: "An error occurred during installation of ${product} on site ${site}. Please check the log."
-#: ../browser.py:104
+#: ../browser.py:77
 msgid "msg_error_install"
 msgstr "Si è verificato un'errore durante l'installazione di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
 
+#. Default: "An error occurred during uninstall of ${product} on site ${site}. Please check the log."
+#: ../browser.py:97
+msgid "msg_error_uninstall"
+msgstr "Si è verificato un'errore durante la disinstallazione di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
+
 #. Default: "An error occurred during upgrade of ${product} on site ${site}. Please check the log."
-#: ../browser.py:126
+#: ../browser.py:116
 msgid "msg_error_upgrade"
 msgstr "Si è verificato un'errore durante l'aggiornamento di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
 
+#. Default: "Product"
+#: ../lookup_products.pt:25
+msgid "product_label"
+msgstr "Prodotto"
+
+#. Default: "Uninstall"
+#: ../lookup_products.pt:59
+msgid "uninstall_label"
+msgstr "Disinstalla"
+
 #. Default: "Upgrade"
-#: ../lookup_products.pt:60
+#: ../lookup_products.pt:81
 msgid "upgrade_label"
 msgstr "Aggiorna"
 

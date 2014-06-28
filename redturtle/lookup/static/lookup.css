@@ -23,18 +23,28 @@ a.productAction.loading .glyphicon-refresh {
 table.table-condensed th.site {
     vertical-align: bottom;
     max-width: 20px;
+    text-align: center;
+}
+
+table.table-condensed td.productInfo,
+table.table-condensed td.actions {
+  text-align: center;
 }
 
 div.siteId:before {
-   content: "";
-   float: left;
-   margin-top: 100%;
+  content: "";
+  float: left;
+  margin-top: 100%;
 }
 
 div.siteId {
-    display: inline-block;
-    white-space: nowrap;
-    -webkit-transform: translate(0,100%) rotate(-70deg);
-    -webkit-transform-origin: 0 0;
-    padding-left: 5px;
+  display: inline-block;
+  white-space: nowrap;
+  transform: translate(0,100%) rotate(-70deg);
+  transform-origin: 0 0;
+  padding-left: 5px;
+}
+
+.productInfo .label {
+  padding: 0.5em .9em .6em;
 }

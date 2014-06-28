@@ -19,28 +19,50 @@ $(document).ready(function() {
     $('.tooltipInfo').each(function() {
         $(this).tooltip();
     });
-    $('a.productAction').each(function() {
-        $(this).click(function(event) {
-            event.preventDefault();
-            var $this = $(this);
-            $this.addClass('loading');
-            $this.append( '<i class="glyphicon glyphicon-refresh"></i>' );
-            $.ajax({
-                url: this.href,
-                dataType: "json",
-                success: function(data) {
-                    if (data.result === 'ok') {
-                        $this.replaceWith( '<span class="label label-success">Ok</span>' );
+    $('table.table').on('click', 'a.productAction' , function(event){
+        event.preventDefault();
+        var $this = $(this);
+        $this.addClass('loading');
+        $this.append( '<i class="glyphicon glyphicon-refresh"></i>' );
+        $.ajax({
+            url: this.href,
+            dataType: "json",
+            success: function(data) {
+                var $this_data = $this.data();
+                if (data.result === 'ok') {
+                    if (data.new_state === 'installed') {
+                        $this.parent().attr('class', 'productInfo success');
+                        html = '<a class="productAction label label-danger"';
+                        html +=' href="' + $this_data.portalUrl + '/@@handle-products?action=uninstall&product=' + $this_data.productId + '"';
+                        html += ' data-portal-url="' + $this_data.portalUrl + '"';
+                        html += ' data-product-id="' + $this_data.productId + '"';
+                        html += ' data-uninstall-label="' + $this_data.uninstallLabel + '"';
+                        html += ' data-install-label="' + $this_data.installLabel + '"';
+                        html += ' ">';
+                        html += $this_data.uninstallLabel + '</a>';
+                        $this.replaceWith( html );
                     }
-                    else if (data.result === 'nok') {
-                        $this.removeClass('loading');
-                        $('i.glyphicon-refresh').remove();
-                        if (data.msg !== undefined) {
-                            alert(data.msg);
-                        }
+                    else if (data.new_state === 'uninstalled') {
+                        $this.parent().attr('class', 'productInfo');
+                        html = '<a class="productAction label label-default"';
+                        html +=' href="' + $this_data.portalUrl + '/@@handle-products?action=install&product=' + $this_data.productId + '"';
+                        html += ' data-portal-url="' + $this_data.portalUrl + '"';
+                        html += ' data-product-id="' + $this_data.productId + '"';
+                        html += ' data-uninstall-label="' + $this_data.uninstallLabel + '"';
+                        html += ' data-install-label="' + $this_data.installLabel + '"';
+                        html += '">';
+                        html += $this_data.installLabel + '</a>';
+                        $this.replaceWith( html );
                     }
                 }
-            });
+                else if (data.result === 'nok') {
+                    $this.removeClass('loading');
+                    $('i.glyphicon-refresh').remove();
+                    if (data.msg !== undefined) {
+                        alert(data.msg);
+                    }
+                }
+            }
         });
     });
 });

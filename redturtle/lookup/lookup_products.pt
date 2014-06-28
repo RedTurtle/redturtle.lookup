@@ -20,56 +20,80 @@
       <table class="table table-condensed"
              tal:define="sites python:results.get('sites');
                          products python:results.get('products');">
-        <tr>
-          <th i18n:translate="product_label">Product</th>
-          <th tal:repeat="site sites"
-              class="site">
-              <div tal:content="site/getId"
-                    class="siteId"/>
-          </th>
-        </tr>
-        <tr>
-          <td></td>
-          <td tal:repeat="site sites">
-              <button class="btn btn-sm btn-info siteActions"
-                      data-placement="bottom"
-                      data-toggle="popover"
-                      data-container="body"
-                      type="button"
-                      data-original-title="Azioni"
-                      data-trigger="click"
-                      tal:attributes="data-portal-url site/portal_url">
-                  <i class="glyphicon glyphicon-info-sign"></i>
-              </button>
-          </td>
-        </tr>
-        <tr tal:repeat="product products">
-          <td>
-            <a tal:attributes="href string:${context/absolute_url}/@@product-info?product=${product/id}">
-                <span tal:content="string:${product/title} (${product/id})" />
-            </a>
-          </td>
-          <tal:info repeat="site sites">
-            <td class="productInfo"
-                tal:define="info python:view.getProductState(site, product.get('id'))">
-              <span tal:condition="python:info.get('status')=='installed'"
-                    class="label label-success">Ok</span>
-              <tal:to_install condition="python:info.get('status')=='notInstalled'">
-                <a class="productAction label label-primary"
-                   tal:attributes="href string:${site/absolute_url}/@@handle-products?action=install&product=${product/id}"
-                   i18n:translate="install_label">Install</a>
-              </tal:to_install>
-              <tal:to_upgrade condition="python:info.get('status')=='toBeUpgraded'">
-                <a class="productAction label label-warning tooltipInfo"
-                   data-toggle="tooltip"
-                   data-placement="top"
-                   tal:attributes="href string:${site/absolute_url}/@@handle-products?action=upgrade&product=${product/id};
-                                   title string:${info/installed_version} -> ${info/new_version}"
-                   i18n:translate="upgrade_label">Upgrade</a>
-              </tal:to_upgrade>
+        <thead>
+          <tr>
+            <th i18n:translate="product_label">Product</th>
+            <th tal:repeat="site sites"
+                class="site">
+                <div tal:content="site/getId"
+                      class="siteId"/>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td />
+            <td class="actions" tal:repeat="site sites">
+                <button class="btn btn-sm btn-info siteActions popover-dismiss"
+                        data-placement="bottom"
+                        data-toggle="popover"
+                        data-container="body"
+                        type="button"
+                        data-original-title="Azioni"
+                        data-trigger="focus"
+                        tal:attributes="data-portal-url site/portal_url">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                </button>
             </td>
-          </tal:info>
-        </tr>
+          </tr>
+          <tr tal:repeat="product products">
+            <td>
+              <a tal:attributes="href string:${context/absolute_url}/@@product-info?product=${product/id}">
+                  <span tal:content="string:${product/title} (${product/id})" />
+              </a>
+            </td>
+            <tal:info repeat="site sites">
+              <tal:product define="info python:view.getProductState(site, product.get('id'))">
+                <td class="productInfo success"
+                    tal:condition="python:info.get('status')=='installed'">
+                  <a class="productAction label label-danger"
+                     tal:attributes="href string:${site/absolute_url}/@@handle-products?action=uninstall&product=${product/id};
+                                    data-portal-url site/portal_url;
+                                    data-product-id product/id;"
+                     data-uninstall-label="Uninstall"
+                     data-install-label="Install"
+                     i18n:attributes="data-install-label; data-uninstall-label"
+                     i18n:translate="uninstall_label">Uninstall</a>
+                </td>
+                <td class="productInfo"
+                    tal:condition="python:info.get('status')=='notInstalled'">
+                  <a class="productAction label label-default"
+                     data-uninstall-label="Uninstall"
+                     data-install-label="Install"
+                     tal:attributes="href string:${site/absolute_url}/@@handle-products?action=install&product=${product/id};
+                                     data-portal-url site/portal_url;
+                                     data-product-id product/id;"
+                     i18n:attributes="data-install-label; data-uninstall-label"
+                     i18n:translate="install_label">Install</a>
+                </td>
+                <td class="productInfo warning"
+                    tal:condition="python:info.get('status')=='toBeUpgraded'">
+                  <a class="productAction label label-warning tooltipInfo"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     data-uninstall-label="Uninstall"
+                     data-install-label="Install"
+                     tal:attributes="href string:${site/absolute_url}/@@handle-products?action=upgrade&product=${product/id};
+                                     title string:${info/installed_version} -> ${info/new_version};
+                                     data-portal-url site/portal_url;
+                                     data-product-id product/id;"
+                     i18n:attributes="data-install-label; data-uninstall-label"
+                     i18n:translate="upgrade_label">Upgrade</a>
+                </td>
+              </tal:product>
+            </tal:info>
+          </tr>
+        </tbody>
       </table>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
