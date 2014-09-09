@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1 (unreleased)
+2.1 (2014-09-09)
 ----------------
 
 - New view that allows to install/upgrade products [cekk]
