@@ -29,6 +29,7 @@ table.table-condensed th.site {
 table.table-condensed td.productInfo,
 table.table-condensed td.actions {
   text-align: center;
+  vertical-align: middle;
 }
 
 div.siteId:before {
