@@ -17,7 +17,8 @@
 <body tal:define="results view/sites_infos">
     <div class="container-fluid">
       <h1 i18n:translate="lookup_title">Sites lookup</h1>
-      <table class="table table-condensed"
+      <table class="table table-condensed table-hover"
+             id="productsTable"
              tal:define="sites python:results.get('sites');
                          products python:results.get('products');">
         <thead>
@@ -101,5 +102,14 @@
     <script src="++resource++redturtle.lookup.static/handle_products.js"></script>
     <script src="++resource++redturtle.lookup.static/prefixfree.min.js"></script>
     <script src="++resource++redturtle.lookup.static/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.8/jquery.floatThead.min.js"></script>
+    <script>
+        $('table#productsTable').floatThead({
+          useAbsolutePositioning: false
+          // absolutePositioning is better for
+          // highly dynamic sites
+          // (which this is not)
+        });
+    </script>
 </body>
 </html>

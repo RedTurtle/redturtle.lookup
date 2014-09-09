@@ -49,3 +49,7 @@ div.siteId {
 .productInfo .label {
   padding: 0.5em .9em .6em;
 }
+
+.floatThead-table thead th {
+  background-color: #FFF;
+}
