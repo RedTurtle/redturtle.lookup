@@ -50,6 +50,10 @@ div.siteId {
   padding: 0.5em .9em .6em;
 }
 
-.floatThead-table thead th {
+.dataTable thead th {
   background-color: #FFF;
+}
+
+#productsTable_filter {
+  float: right;
 }
