@@ -8,7 +8,7 @@ import json
 from pkginfo import Installed
 from redturtle.lookup import lookupMessageFactory as _
 from zope.i18n import translate
-import logging
+from redturtle.lookup import logger
 
 
 class LookupProductsView(BrowserView):
@@ -37,20 +37,20 @@ class LookupProductsView(BrowserView):
         return info about given product
         """
         qi = getToolByName(site, 'portal_quickinstaller')
-        res_dict = {}
         if not qi.isProductInstalled(product_id):
-            res_dict['status'] = "notInstalled"
+            return {'status': "notInstalled"}
+        try:
+            upgrade_info = qi.upgradeInfo(product_id)
+        except Exception:
+            logger.exception("Unable to retrieve infos")
+            return {'status': 'error'}
+        res_dict = {}
+        res_dict['installed_version'] = upgrade_info.get('installedVersion')
+        res_dict['new_version'] = upgrade_info.get('newVersion')
+        if upgrade_info.get('available') and upgrade_info.get('required'):
+            res_dict['status'] = "toBeUpgraded"
         else:
-            try:
-                upgrade_info = qi.upgradeInfo(product_id)
-            except Exception as e:
-                return res_dict
-            res_dict['installed_version'] = upgrade_info.get('installedVersion')
-            res_dict['new_version'] = upgrade_info.get('newVersion')
-            if upgrade_info.get('available') and upgrade_info.get('required'):
-                res_dict['status'] = "toBeUpgraded"
-            else:
-                res_dict['status'] = "installed"
+            res_dict['status'] = "installed"
         return res_dict
 
 
@@ -90,7 +90,7 @@ class HandleProductsView(BrowserView):
                 return json.dumps({'msg': result,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in install step")
+            logger.exception("Error in install step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 
@@ -111,7 +111,7 @@ class HandleProductsView(BrowserView):
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in uninstall step")
+            logger.exception("Error in uninstall step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 
@@ -127,12 +127,12 @@ class HandleProductsView(BrowserView):
             result = qi.upgradeProduct(pid)
             if not result:
                 return json.dumps({'result': 'ok',
-                                    'new_state': 'installed'})
+                                    'new_state': 'updated'})
             else:
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in upgrade step")
+            logger.exception("Error in upgrade step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 

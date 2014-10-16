@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
-	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-	  i18n:domain="redturtle.lookup">
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="redturtle.lookup">
 <head>
   <title tal:content="context/title">@@lookup-products</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="++resource++redturtle.lookup.static/bootstrap-theme.min.css">
   <link href="++resource++redturtle.lookup.static/bootstrap-glyphicons.css" rel="stylesheet">
   <link href="++resource++redturtle.lookup.static/lookup.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body tal:define="results view/sites_infos">
     <div class="container-fluid">
@@ -55,31 +56,36 @@
             </td>
             <tal:info repeat="site sites">
               <tal:product define="info python:view.getProductState(site, product.get('id'))">
-                <td class="productInfo success"
+                <td class="productInfo"
                     tal:condition="python:info.get('status')=='installed'">
-                  <a class="productAction label label-danger"
+                  <a class="productAction label uninstall label-danger tooltipInfo"
                      tal:attributes="href string:${site/absolute_url}/@@handle-products?action=uninstall&product=${product/id};
                                     data-portal-url site/portal_url;
                                     data-product-id product/id;"
                      data-uninstall-label="Uninstall"
                      data-install-label="Install"
-                     i18n:attributes="data-install-label; data-uninstall-label"
-                     i18n:translate="uninstall_label">Uninstall</a>
+                     title="Uninstall"
+                     i18n:attributes="title; data-install-label; data-uninstall-label">
+                     <i class="fa fa-trash fa-lg"></i></a>
                 </td>
                 <td class="productInfo"
                     tal:condition="python:info.get('status')=='notInstalled'">
-                  <a class="productAction label label-default"
+                  <a class="productAction label install label-primary tooltipInfo"
+                     data-toggle="tooltip"
+                     data-placement="top"
                      data-uninstall-label="Uninstall"
                      data-install-label="Install"
+                     title="Install"
                      tal:attributes="href string:${site/absolute_url}/@@handle-products?action=install&product=${product/id};
                                      data-portal-url site/portal_url;
                                      data-product-id product/id;"
-                     i18n:attributes="data-install-label; data-uninstall-label"
-                     i18n:translate="install_label">Install</a>
+                     i18n:attributes="title; data-install-label; data-uninstall-label">
+                     <i class="fa fa-plus fa-lg"></i>
+                   </a>
                 </td>
-                <td class="productInfo warning"
+                <td class="productInfo"
                     tal:condition="python:info.get('status')=='toBeUpgraded'">
-                  <a class="productAction label label-warning tooltipInfo"
+                  <a class="productAction upgrade label label-warning tooltipInfo"
                      data-toggle="tooltip"
                      data-placement="top"
                      data-uninstall-label="Uninstall"
@@ -88,8 +94,34 @@
                                      title string:${info/installed_version} -> ${info/new_version};
                                      data-portal-url site/portal_url;
                                      data-product-id product/id;"
-                     i18n:attributes="data-install-label; data-uninstall-label"
-                     i18n:translate="upgrade_label">Upgrade</a>
+                     i18n:attributes="data-install-label; data-uninstall-label">
+                     <i class="fa fa-refresh fa-lg"></i>
+                   </a>
+                   <a class="productAction label uninstall label-danger tooltipInfo"
+                     tal:attributes="href string:${site/absolute_url}/@@handle-products?action=uninstall&product=${product/id};
+                                    data-portal-url site/portal_url;
+                                    data-product-id product/id;"
+                     data-uninstall-label="Uninstall"
+                     data-install-label="Install"
+                     title="Uninstall"
+                     i18n:attributes="data-install-label; data-uninstall-label">
+                     <i class="fa fa-trash-o fa-lg"></i></a>
+                </td>
+                <td class="productInfo"
+                    tal:condition="python:info.get('status')=='error' or not info">
+                  <a class="productAction label label-danger tooltipInfo"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     data-uninstall-label="Uninstall"
+                     data-install-label="Install"
+                     target="_blank"
+                     tal:attributes="href string:${site/absolute_url}/prefs_install_products_form;
+                                     data-portal-url site/portal_url;
+                                     data-product-id product/id;"
+                     title="Something goes wrong with this product. Try to manage it in portal's control panel"
+                     i18n:attributes="title; data-install-label; data-uninstall-label">
+                     <i class="fa fa-warning fa-lg"></i>
+                   </a>
                 </td>
               </tal:product>
             </tal:info>
