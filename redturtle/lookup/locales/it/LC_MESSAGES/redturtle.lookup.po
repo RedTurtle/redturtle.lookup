@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-06-28 13:59+0000\n"
+"POT-Creation-Date: 2014-10-16 07:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr "Pannello di controllo"
 msgid "Id"
 msgstr "Id"
 
-#: ../lookup_products.pt:59
+#: ../lookup_products.pt:61
 msgid "Install"
 msgstr "Installa"
 
@@ -46,6 +46,10 @@ msgstr "Prodotti"
 msgid "Site upgraded"
 msgstr "Sito aggiornato"
 
+#: ../lookup_products.pt:112
+msgid "Something goes wrong with this product. Try to manage it in portal's control panel"
+msgstr "Si è verificato un errore con questo prodotto. Prova a gestirlo direttamente nel pannello di controllo del portale"
+
 #: ../lookup.pt:55
 msgid "Status"
 msgstr "Stato"
@@ -54,7 +58,7 @@ msgstr "Stato"
 msgid "Title"
 msgstr "Titolo"
 
-#: ../lookup_products.pt:59
+#: ../lookup_products.pt:61
 msgid "Uninstall"
 msgstr "Disinstalla"
 
@@ -75,45 +79,30 @@ msgstr "ZMI"
 msgid "go_back_label"
 msgstr "Torna indietro"
 
-#. Default: "Install"
-#: ../lookup_products.pt:70
-msgid "install_label"
-msgstr "Installa"
-
 #. Default: "Sites lookup"
-#: ../lookup_products.pt:19
+#: ../lookup_products.pt:20
 msgid "lookup_title"
 msgstr "Gestione portali"
 
 #. Default: "An error occurred during installation of ${product} on site ${site}. Please check the log."
-#: ../browser.py:77
+#: ../browser.py:79
 msgid "msg_error_install"
 msgstr "Si è verificato un'errore durante l'installazione di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
 
 #. Default: "An error occurred during uninstall of ${product} on site ${site}. Please check the log."
-#: ../browser.py:97
+#: ../browser.py:100
 msgid "msg_error_uninstall"
 msgstr "Si è verificato un'errore durante la disinstallazione di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
 
 #. Default: "An error occurred during upgrade of ${product} on site ${site}. Please check the log."
-#: ../browser.py:116
+#: ../browser.py:121
 msgid "msg_error_upgrade"
 msgstr "Si è verificato un'errore durante l'aggiornamento di ${product} sul sito ${site}. Controlla il log per ulteriori informazioni."
 
 #. Default: "Product"
-#: ../lookup_products.pt:25
+#: ../lookup_products.pt:27
 msgid "product_label"
 msgstr "Prodotto"
-
-#. Default: "Uninstall"
-#: ../lookup_products.pt:59
-msgid "uninstall_label"
-msgstr "Disinstalla"
-
-#. Default: "Upgrade"
-#: ../lookup_products.pt:81
-msgid "upgrade_label"
-msgstr "Aggiorna"
 
 #. Default: "Url:"
 #: ../product-info.pt:37

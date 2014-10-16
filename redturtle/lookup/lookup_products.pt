@@ -105,11 +105,11 @@
                      data-install-label="Install"
                      title="Uninstall"
                      i18n:attributes="data-install-label; data-uninstall-label">
-                     <i class="fa fa-trash-o fa-lg"></i></a>
+                     <i class="fa fa-trash fa-lg"></i></a>
                 </td>
                 <td class="productInfo"
                     tal:condition="python:info.get('status')=='error' or not info">
-                  <a class="productAction label label-danger tooltipInfo"
+                  <a class="label label-danger tooltipInfo"
                      data-toggle="tooltip"
                      data-placement="top"
                      data-uninstall-label="Uninstall"
