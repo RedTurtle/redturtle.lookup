@@ -66,7 +66,7 @@
                      data-install-label="Install"
                      title="Uninstall"
                      i18n:attributes="title; data-install-label; data-uninstall-label">
-                     <i class="fa fa-trash fa-lg"></i></a>
+                     <i class="fa fa-minus fa-lg"></i></a>
                 </td>
                 <td class="productInfo"
                     tal:condition="python:info.get('status')=='notInstalled'">
@@ -105,7 +105,7 @@
                      data-install-label="Install"
                      title="Uninstall"
                      i18n:attributes="data-install-label; data-uninstall-label">
-                     <i class="fa fa-trash fa-lg"></i></a>
+                     <i class="fa fa-minus fa-lg"></i></a>
                 </td>
                 <td class="productInfo"
                     tal:condition="python:info.get('status')=='error' or not info">

@@ -34,20 +34,9 @@ $(document).ready(function() {
                         $this.attr('class', "productAction label label-danger tooltipInfo");
                         $this.attr('href', $this_data.portalUrl + '/@@handle-products?action=uninstall&product=' + $this_data.productId);
                         $this.attr('title', $this_data.uninstallLabel);
-                        $this.html('<i class="fa fa-trash fa-lg"></i></a>');
+                        $this.html('<i class="fa fa-minus fa-lg"></i></a>');
                         $this.tooltip('destroy');
                         $this.tooltip();
-                        // html = '<a class="productAction label label-danger tooltipInfo"';
-                        // html +=' href="' + $this_data.portalUrl + '/@@handle-products?action=uninstall&product=' + $this_data.productId + '"';
-                        // html += ' data-portal-url="' + $this_data.portalUrl + '"';
-                        // html += ' data-product-id="' + $this_data.productId + '"';
-                        // html += ' data-uninstall-label="' + $this_data.uninstallLabel + '"';
-                        // html += ' data-install-label="' + $this_data.installLabel + '"';
-                        // html += ' title="' + $this_data.uninstallLabel + '"';
-                        // html += ' ">';
-                        // html += '<i class="fa fa-trash fa-lg"></i></a>';
-                        // html += '</a>';
-                        // $this.html(html);
                     }
                     else if (data.new_state === 'uninstalled') {
                         $this.siblings('.upgrade').remove();

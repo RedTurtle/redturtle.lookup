@@ -31,3 +31,8 @@ div.siteId {
 .dataTable thead th {
   background-color: #FFF;
 }
+
+.productInfo .upgrade {
+  margin-right: 0.5em;
+  padding-right: 0.6em;
+}
