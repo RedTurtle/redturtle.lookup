@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2 (unreleased)
+2.2 (2014-10-20)
 ----------------
 
 - View improvements: font-awesome dependency and refactoring buttons in table [cekk]
