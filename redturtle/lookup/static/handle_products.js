@@ -23,7 +23,7 @@ $(document).ready(function() {
         event.preventDefault();
         var $this = $(this);
         var old_html = $this.html();
-        $this.html( '<i class="fa fa-refresh fa-spin fa-lg"></i>' );
+        $this.children('i').attr('class', 'fa fa-cog fa-spin fa-lg');
         $.ajax({
             url: this.href,
             dataType: "json",
@@ -34,7 +34,7 @@ $(document).ready(function() {
                         $this.attr('class', "productAction label label-danger tooltipInfo");
                         $this.attr('href', $this_data.portalUrl + '/@@handle-products?action=uninstall&product=' + $this_data.productId);
                         $this.attr('title', $this_data.uninstallLabel);
-                        $this.html('<i class="fa fa-minus fa-lg"></i></a>');
+                        $this.children('i').attr('class', 'fa fa-minus fa-lg');
                         $this.tooltip('destroy');
                         $this.tooltip();
                     }
@@ -43,7 +43,7 @@ $(document).ready(function() {
                         $this.attr('class', "productAction label label-primary tooltipInfo");
                         $this.attr('href', $this_data.portalUrl + '/@@handle-products?action=install&product=' + $this_data.productId);
                         $this.attr('title', $this_data.installLabel);
-                        $this.html('<i class="fa fa-plus fa-lg"></i></a>');
+                        $this.children('i').attr('class', 'fa fa-plus fa-lg');
                         $this.tooltip('destroy');
                         $this.tooltip();
                     }

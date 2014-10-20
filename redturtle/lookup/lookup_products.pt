@@ -134,16 +134,10 @@
     <script src="++resource++redturtle.lookup.static/handle_products.js"></script>
     <script src="++resource++redturtle.lookup.static/prefixfree.min.js"></script>
     <script src="++resource++redturtle.lookup.static/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="++resource++redturtle.lookup.static/jquery.dataTables.min.js"></script>
-    <script src="++resource++redturtle.lookup.static/dataTables.fixedHeader.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.8/jquery.floatThead.min.js"></script>
     <script>
       $(document).ready(function() {
-          var table = $('#productsTable').dataTable( {
-              "paging":   false,
-              "ordering": false,
-          } );
-          new $.fn.dataTable.FixedHeader( table );
+          $('#productsTable').floatThead();
       } );
     </script>
 </body>

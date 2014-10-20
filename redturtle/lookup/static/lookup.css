@@ -28,11 +28,11 @@ div.siteId {
   padding: 0.5em .9em .6em;
 }
 
-.dataTable thead th {
+.table-condensed thead th {
   background-color: #FFF;
 }
 
 .productInfo .upgrade {
-  margin-right: 0.5em;
-  padding-right: 0.6em;
+  margin-bottom: 3px;
+  display: inline-block;
 }
