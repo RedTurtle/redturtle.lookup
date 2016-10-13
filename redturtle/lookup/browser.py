@@ -11,6 +11,7 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 from zope.interface import implements
 import json
+from redturtle.lookup import logger
 
 
 class LookupProductsView(BrowserView):
@@ -130,7 +131,7 @@ class HandleProductsView(BrowserView):
             result = qi.upgradeProduct(pid)
             if not result:
                 return json.dumps({'result': 'ok',
-                                    'new_state': 'installed'})
+                                    'new_state': 'updated'})
             else:
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
