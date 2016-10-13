@@ -1,14 +1,16 @@
-from zope.interface import implements
-from Products.Five.browser import BrowserView
 from interfaces import ILookupProducts, IHandleProducts
+from pkginfo import Installed
 from plone.memoize.view import memoize
+from plone.protect.interfaces import IDisableCSRFProtection
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-import json
-from pkginfo import Installed
+from Products.Five.browser import BrowserView
+from redturtle.lookup import logger
 from redturtle.lookup import lookupMessageFactory as _
 from zope.i18n import translate
-import logging
+from zope.interface import alsoProvides
+from zope.interface import implements
+import json
 
 
 class LookupProductsView(BrowserView):
@@ -37,20 +39,20 @@ class LookupProductsView(BrowserView):
         return info about given product
         """
         qi = getToolByName(site, 'portal_quickinstaller')
-        res_dict = {}
         if not qi.isProductInstalled(product_id):
-            res_dict['status'] = "notInstalled"
+            return {'status': "notInstalled"}
+        try:
+            upgrade_info = qi.upgradeInfo(product_id)
+        except Exception:
+            logger.exception("Unable to retrieve infos")
+            return {'status': 'error'}
+        res_dict = {}
+        res_dict['installed_version'] = upgrade_info.get('installedVersion')
+        res_dict['new_version'] = upgrade_info.get('newVersion')
+        if upgrade_info.get('available') and upgrade_info.get('required'):
+            res_dict['status'] = "toBeUpgraded"
         else:
-            try:
-                upgrade_info = qi.upgradeInfo(product_id)
-            except Exception as e:
-                return res_dict
-            res_dict['installed_version'] = upgrade_info.get('installedVersion')
-            res_dict['new_version'] = upgrade_info.get('newVersion')
-            if upgrade_info.get('available') and upgrade_info.get('required'):
-                res_dict['status'] = "toBeUpgraded"
-            else:
-                res_dict['status'] = "installed"
+            res_dict['status'] = "installed"
         return res_dict
 
 
@@ -60,6 +62,7 @@ class HandleProductsView(BrowserView):
     implements(IHandleProducts)
 
     def __call__(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         # site_id = self.request.form.get('site')
         product_id = self.request.form.get('product')
         action = self.request.form.get('action')
@@ -90,7 +93,7 @@ class HandleProductsView(BrowserView):
                 return json.dumps({'msg': result,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in install step")
+            logger.exception("Error in install step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 
@@ -111,7 +114,7 @@ class HandleProductsView(BrowserView):
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in uninstall step")
+            logger.exception("Error in uninstall step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 
@@ -132,7 +135,7 @@ class HandleProductsView(BrowserView):
                 return json.dumps({'msg': error_msg,
                                    'result': 'nok'})
         except Exception:
-            logging.exception("Error in upgrade step")
+            logger.exception("Error in upgrade step")
             return json.dumps({'msg': error_msg,
                                'result': 'nok'})
 

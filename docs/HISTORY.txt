@@ -4,7 +4,7 @@ Changelog
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Disabled csrf [cekk]
 
 
 2.1 (2014-09-09)
@@ -42,4 +42,3 @@ Plone 4 compatible version
 ------------------
 
 * Initial release
-

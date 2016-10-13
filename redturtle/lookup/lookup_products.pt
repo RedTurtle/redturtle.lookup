@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="++resource++redturtle.lookup.static/bootstrap-theme.min.css">
   <link href="++resource++redturtle.lookup.static/bootstrap-glyphicons.css" rel="stylesheet">
   <link href="++resource++redturtle.lookup.static/lookup.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body tal:define="results view/sites_infos">
     <div class="container-fluid">
@@ -63,19 +64,20 @@
                                     data-product-id product/id;"
                      data-uninstall-label="Uninstall"
                      data-install-label="Install"
-                     i18n:attributes="data-install-label; data-uninstall-label"
-                     i18n:translate="uninstall_label">Uninstall</a>
+                     i18n:attributes="data-install-label; data-uninstall-label">
+                     <i class="fa fa-trash-o fa-lg"></i></a>
                 </td>
                 <td class="productInfo"
                     tal:condition="python:info.get('status')=='notInstalled'">
-                  <a class="productAction label label-default"
+                  <a class="productAction label label-primary"
                      data-uninstall-label="Uninstall"
                      data-install-label="Install"
                      tal:attributes="href string:${site/absolute_url}/@@handle-products?action=install&product=${product/id};
                                      data-portal-url site/portal_url;
                                      data-product-id product/id;"
-                     i18n:attributes="data-install-label; data-uninstall-label"
-                     i18n:translate="install_label">Install</a>
+                     i18n:attributes="data-install-label; data-uninstall-label">
+                     <i class="fa fa-plus fa-lg"></i>
+                   </a>
                 </td>
                 <td class="productInfo warning"
                     tal:condition="python:info.get('status')=='toBeUpgraded'">
