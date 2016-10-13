@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.4 (unreleased)
+2.4 (2016-10-13)
 ----------------
 
 - Disabled csrf [cekk]
