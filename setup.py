@@ -29,6 +29,15 @@ setup(name='redturtle.lookup',
           'Products.CMFPlone>4.0b1',
           'pkginfo'
       ],
+      extras_require={
+        'test': [
+            'plone.app.testing',
+            'plone.testing>=5.0.0',
+            'plone.app.contenttypes',
+            'plone.app.robotframework[debug]',
+            'unittest2',
+            ]
+    },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

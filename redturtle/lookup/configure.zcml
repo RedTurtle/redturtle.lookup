@@ -6,33 +6,6 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <browser:page
-    name="lookup"
-    for="OFS.interfaces.IApplication"
-    permission="zope2.ViewManagementScreens"
-    class=".browser.LookupProductsView"
-    template="lookup_products.pt"
-    allowed_interface=".interfaces.ILookupProducts"
-    />
-  
-  <browser:page
-    name="handle-products"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    permission="zope2.ViewManagementScreens"
-    class=".browser.HandleProductsView"
-    allowed_interface=".interfaces.IHandleProducts"
-    />
+  <include package=".api" />
 
-  <browser:page
-    name="product-info"
-    for="OFS.interfaces.IApplication"
-    permission="zope2.ViewManagementScreens"
-    class=".browser.ProductInfoView"
-    template="product-info.pt"
-    />
-  <!-- Resource directory for stylesheets -->
-  <browser:resourceDirectory
-      name="redturtle.lookup.static"
-      directory="static"
-      />
 </configure>
