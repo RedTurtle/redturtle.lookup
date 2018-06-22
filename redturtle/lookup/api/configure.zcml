@@ -4,16 +4,34 @@
     xmlns:i18n="http://namespaces.zope.org/i18n">
 
   <browser:page
-    name="plone-overview1"
-    for="OFS.interfaces.IApplication"
-    permission="zope2.ViewManagementScreens"
-    template="overview.pt"
-    />
-
-  <browser:page
     name="status"
     for="OFS.interfaces.IApplication"
     permission="zope2.ViewManagementScreens"
     class=".view.StatusView"
+    />
+  <browser:page
+    name="generate-authenticator"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".view.GenerateAuthenticatorTokenView"
+    />
+
+  <browser:page
+    name="upgrade-product"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".view.UpgradeProductView"
+    />
+  <browser:page
+    name="install-product"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".view.InstallProductView"
+    />
+  <browser:page
+    name="uninstall-product"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".view.UninstallProductView"
     />
 </configure>

@@ -7,14 +7,15 @@ setup(name='redturtle.lookup',
       version=version,
       description="List products information for different Plone sites in a single instance",
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.rst")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      open(os.path.join("docs", "HISTORY.rst")).read(),
+      # Get more strings from
+      # http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Framework :: Plone :: 4.2",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+          "Framework :: Plone",
+          "Framework :: Plone :: 4.2",
+          "Programming Language :: Python",
+          "Topic :: Software Development :: Libraries :: Python Modules",
+      ],
       keywords='',
       author='RedTurtle',
       author_email='sviluppoplone@redturtle.it',
@@ -27,17 +28,18 @@ setup(name='redturtle.lookup',
       install_requires=[
           'setuptools',
           'Products.CMFPlone>4.0b1',
-          'pkginfo'
+          'pkginfo',
+          'z3c.jbot'
       ],
       extras_require={
-        'test': [
-            'plone.app.testing',
-            'plone.testing>=5.0.0',
-            'plone.app.contenttypes',
-            'plone.app.robotframework[debug]',
-            'unittest2',
-            ]
-    },
+          'test': [
+              'plone.app.testing',
+              'plone.testing>=5.0.0',
+              'plone.app.contenttypes',
+              'plone.app.robotframework[debug]',
+              'unittest2',
+          ]
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

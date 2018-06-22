@@ -1,69 +1,64 @@
 // @flow
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Header } from 'semantic-ui-react';
-import TopMenuContainer from './containers/TopMenuContainer';
-import { Container } from 'semantic-ui-react';
+
 import LookupContext from './containers/LookupContext';
-import fetchApi from './helpers/apiFetcher';
+import SitesWrapper from './components/SitesWrapper';
+import ProductsWrapper from './components/ProductsWrapper';
+import TopMenuContainer from './containers/TopMenuContainer';
+import type { AppProps, AppState } from './types';
+import { Container } from 'semantic-ui-react';
+import { Header, Tab } from 'semantic-ui-react';
+import { getStatus } from './helpers/apiFetcher';
 
-type Product = {
-  description: string,
-  profile_type: string,
-  title: string,
-  upgrade_info: {
-    available: boolean,
-    installedVersion: string,
-    required: boolean,
-    newVersion: string,
-    hasProfile: boolean,
-  },
-  install_profile_id: string,
-  version: string,
-  uninstall_profile_id: string,
-  is_installed: boolean,
-  id: string,
-};
-
-type Site = {
-  available: Array<Product>,
-  installed: Array<Product>,
-  outdated: Array<Product>,
-  id: string,
-  title: string,
-};
-
-type State = {
-  products: Array<Product>,
-  sites: Array<Site>,
-  isLoading: boolean,
-};
-type Props = {};
-
-class App extends Component<Props, State> {
-  constructor(props: Props) {
+class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       products: [],
       sites: [],
+      authenticator: '',
       isLoading: false,
+      retrieveStatus: (): any => {
+        return getStatus().then(data => {
+          return this.setState({ ...this.state, ...data, isLoading: false });
+        });
+      },
     };
   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetchApi({ route: 'status' }).then(data => {
-      this.setState({ ...this.state, ...data, isLoading: false });
-    });
+    this.state.retrieveStatus();
   }
 
   render() {
+    const panes = [
+      {
+        menuItem: 'Sites',
+        render: () => (
+          <Tab.Pane>
+            <SitesWrapper />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: 'Products',
+        render: () => (
+          <Tab.Pane>
+            <ProductsWrapper />
+          </Tab.Pane>
+        ),
+      },
+    ];
+
     return (
       <LookupContext.Provider value={this.state}>
         <div className="App">
           <TopMenuContainer />
           <Container style={{ marginTop: '7em' }}>
             <Header as="h1"> Plone sites lookup </Header>
+            <Tab panes={panes} />
           </Container>
         </div>
       </LookupContext.Provider>

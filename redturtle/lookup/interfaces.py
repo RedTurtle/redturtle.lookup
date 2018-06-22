@@ -1,7 +1,15 @@
 from zope.interface import Interface
+from OFS.interfaces import IApplication
+
+
+class ILookupMarkerInterface(IApplication):
+
+    """
+    """
 
 
 class ILookupProducts(Interface):
+
     """Interface for the site inventory view.
     """
     def sites_infos():
@@ -12,6 +20,7 @@ class ILookupProducts(Interface):
 
 
 class IHandleProducts(Interface):
+
     """Interface for the products handling.
     """
     def install(pid):

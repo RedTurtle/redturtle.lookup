@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Dropdown,
-  Image,
-  Menu,
-  Visibility,
-} from 'semantic-ui-react';
+import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 export default class TopMenuContainer extends Component {
   state = {
@@ -39,14 +33,17 @@ export default class TopMenuContainer extends Component {
         <Container>
           <Menu.Item as="a" header>
             <Image
-              size="mini"
-              src="/logo.png"
+              size="tiny"
+              src="/++resource++plone-logo.png"
               style={{ marginRight: '1.5em' }}
             />
-            Project Name
           </Menu.Item>
-          <Menu.Item as="a">Home</Menu.Item>
-
+          <Menu.Item as="a" href="/">
+            Home
+          </Menu.Item>
+          <Menu.Item as="a" href="/manage_main">
+            ZMI
+          </Menu.Item>
           <Dropdown item simple text="Dropdown">
             <Dropdown.Menu>
               <Dropdown.Item>List Item</Dropdown.Item>
