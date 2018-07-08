@@ -2,8 +2,8 @@
 from AccessControl import Unauthorized
 from Products.CMFPlone.browser.admin import Overview
 from Products.Five.browser import BrowserView
-from plone.protect.authenticator import createToken
-from plone import api
+from plone import api  # noqa
+from plone.protect.authenticator import createToken  # noqa
 from zope.component import getMultiAdapter
 
 import json
@@ -20,23 +20,27 @@ class StatusView(Overview):
             'products': [],
         }
         for site in self.sites():
+            site_url = site.absolute_url()
             data['sites'].append({
                 'id': site.id,
-                'url': site.absolute_url(),
+                'url': site_url,
                 'title': site.title,
                 'outdated': self.site_is_outdated(site),
-                'upgrade_url': '{0}/@@plone-upgrade'.format(site.absolute_url()),
+                'upgrade_url': '{0}/@@plone-upgrade'.format(site_url),
                 'products': {
-                    'outdated': self.get_products_infos(site, 'get_upgrades'),
-                    'installed': self.get_products_infos(site, 'get_installed'),
-                    'available': self.get_products_infos(site, 'get_available'),
+                    'outdated': self.get_products_infos(
+                        site, 'get_upgrades'),
+                    'installed': self.get_products_infos(
+                        site, 'get_installed'),
+                    'available': self.get_products_infos(
+                        site, 'get_available'),
                 }
 
             })
             if not data['products']:
                 data['products'] = self.get_products_infos(site, 'get_addons')
         self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
+        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps(data)
         return data
 
@@ -73,7 +77,7 @@ class GenerateAuthenticatorTokenView(BrowserView):
 
     def __call__(self):
         self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
+        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps({'authenticator': createToken()})
 
 
@@ -81,14 +85,14 @@ class HandleProductView(BrowserView):
 
     def __call__(self):
         authenticator = getMultiAdapter(
-            (self.context, self.request), name=u"authenticator")
+            (self.context, self.request), name=u'authenticator')
         if not authenticator.verify():
             raise Unauthorized
         productId = self.request.form.get('productId')
         res = self.do_action(productId)
 
         self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
+        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps(res)
 
     @property

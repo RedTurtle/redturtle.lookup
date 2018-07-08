@@ -1,4 +1,4 @@
-from zope.interface import Interface
+# -*- coding: utf-8 -*-
 from OFS.interfaces import IApplication
 
 
@@ -6,28 +6,3 @@ class ILookupMarkerInterface(IApplication):
 
     """
     """
-
-
-class ILookupProducts(Interface):
-
-    """Interface for the site inventory view.
-    """
-    def sites_infos():
-        """ get the list of available products """
-
-    def getProductState(site, product_id):
-        """ get the list of available products """
-
-
-class IHandleProducts(Interface):
-
-    """Interface for the products handling.
-    """
-    def install(pid):
-        """ Install a product in a Plone site """
-
-    def uninstall(pid, site_id):
-        """ Uninstall a product in a Plone site """
-
-    def upgrade(pid):
-        """ Upgrade a product in a Plone site """
