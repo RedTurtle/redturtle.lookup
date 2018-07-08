@@ -34,7 +34,7 @@ You simply need to go to your ZMI's root (for example: http://localhost:8080).
 
 .. raw:: html
 
-    <video controls src="/docs/lookup.webm">Sorry, your browser doesn't support embedded videos.</video>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/q6wfXFosfOo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 Development
