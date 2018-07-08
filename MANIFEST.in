@@ -1,7 +1,28 @@
-include *.txt
-
 recursive-include docs *
 recursive-include redturtle *
 
+exclude .installed.cfg
+exclude .mr.developer.cfg
+exclude pip-selfcheck.json
+exclude redturtle/lookup/app/yarn-error.log
+exclude docs/lookup.gif
+
+global-exclude .DS_Store
 global-exclude *.pyc
+global-exclude *pyc
+
 global-include *.mo
+include .editorconfig
+include .gitattributes
+include *.js
+include *.json
+include *.lock
+include *.txt
+
+prune .vscode
+prune node_modules
+prune parts
+prune var
+prune lib
+prune bin
+prune redturtle/lookup/app/node_modules

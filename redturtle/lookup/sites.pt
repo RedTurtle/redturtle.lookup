@@ -1,6 +1,0 @@
-<ul xmlns:tal="http://xml.zope.org/namespaces/tal">
-    <li tal:repeat="site view/sites">
-	    <a tal:attributes="href site/absolute_url"
-	       tal:content="site/absolute_url"></a> <span tal:replace="site/title" />
-    </li>
-</ul>
