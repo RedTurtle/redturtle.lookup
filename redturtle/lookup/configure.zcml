@@ -12,7 +12,7 @@
   <plone:static
       directory="app/build"
       type="plone"
-      name="prova"
+      name="lookup"
     />
 
   <class class="OFS.Application.Application">

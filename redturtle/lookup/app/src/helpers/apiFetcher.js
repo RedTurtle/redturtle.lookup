@@ -2,20 +2,38 @@
 import type { ApiData } from '../types';
 import axios from 'axios';
 
-const username = 'admin';
-const password = 'admin';
-
 const fetchApi = (data: ApiData) => {
   let { route, params, method = 'GET' } = data;
-  return axios({
+  let options: {
+    method: string,
+    url: string,
+    params: any,
+    auth?: any,
+  } = {
     method,
     url: `/${route}`,
-    auth: {
-      username,
-      password,
-    },
     params,
-  })
+  };
+
+  // if (process.env.NODE_ENV !== 'production') {
+  //   if (
+  //     !process.env.REACT_APP_DEV_USERNAME ||
+  //     !process.env.REACT_APP_DEV_PASSWORD
+  //   ) {
+  //     const err = new Error(
+  //       'REACT_APP_DEV_USERNAME or REACT_APP_DEV_PASSWORD not found in ENV. Unable to fetch infos from the api.\nYou need to create a ".env.development.local" file with username and password infos.',
+  //     );
+  //     return new Promise((resolve, reject) => {
+  //       return reject(err);
+  //     });
+  //   }
+  //   options.auth = {
+  //     username: process.env.REACT_APP_DEV_USERNAME,
+  //     password: process.env.REACT_APP_DEV_PASSWORD,
+  //   };
+  // }
+
+  return axios(options)
     .then(({ data }) => {
       return data;
     })

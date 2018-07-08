@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { Item, Label, List, Segment, Icon } from 'semantic-ui-react';
+import { Item, Label, Segment, Icon } from 'semantic-ui-react';
 import type { AppState } from '../../types';
-import HandleProductContainer from '../../containers/HandleProductContainer';
 import ModalContainer from '../../containers/ModalContainer';
 import SiteProductsOverview from '../SiteProductsOverview';
 
@@ -20,11 +19,15 @@ const SitesList = ({ sites, onUpdateStatus }: Props) => {
           const showUpdate = outdated && outdated.length > 0;
           const styles = showUpdate
             ? {
-                color: showUpdate ? 'red' : '',
+                color: showUpdate ? 'orange' : '',
               }
             : {};
           let productsModal = (
-            <ModalContainer label="Products" labelProps={styles}>
+            <ModalContainer
+              buttonLabel="Products"
+              labelProps={styles}
+              headerLabel={`Products for ${site.title}`}
+            >
               <SiteProductsOverview
                 site={site}
                 onUpdateStatus={onUpdateStatus}
@@ -35,7 +38,7 @@ const SitesList = ({ sites, onUpdateStatus }: Props) => {
           return (
             <Segment {...styles} key={site.id}>
               {showUpdate ? (
-                <Label attached="top right" color="red">
+                <Label attached="top right" color="orange">
                   <Icon name="warning sign" /> Some products needs an upgrade
                 </Label>
               ) : null}

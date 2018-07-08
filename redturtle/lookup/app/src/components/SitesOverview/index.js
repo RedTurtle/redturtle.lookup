@@ -63,7 +63,7 @@ const SitesOverview = ({
             {' '}
             {installed.map(id => {
               const siteProduct = sites.reduce((foundProduct, site) => {
-                if (foundProduct) {
+                if (foundProduct || site.id !== id) {
                   return foundProduct;
                 }
                 return site.products.installed.reduce((prod, item) => {

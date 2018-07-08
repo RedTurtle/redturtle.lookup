@@ -14,7 +14,8 @@ type Props = {
     color?: string,
     ribbon?: string,
   },
-  label: string,
+  buttonLabel: string,
+  headerLabel: string,
 };
 
 class UpgradesModalContainer extends Component<Props, State> {
@@ -31,19 +32,19 @@ class UpgradesModalContainer extends Component<Props, State> {
   };
 
   render() {
-    const { children, labelProps, label } = this.props;
+    const { children, buttonLabel, headerLabel } = this.props;
     return (
       <Modal
         trigger={
           <Label as="a" onClick={this.openModal}>
-            {label}
+            {buttonLabel}
           </Label>
         }
         open={this.state.modalIsOpen}
         onClose={this.closeModal}
         size="small"
       >
-        <Modal.Header>Upgrade products</Modal.Header>
+        <Modal.Header>{headerLabel}</Modal.Header>
         <Modal.Content>{children}</Modal.Content>
       </Modal>
     );

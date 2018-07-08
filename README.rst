@@ -1,20 +1,93 @@
 Introduction
 ============
 
-This product is done for the not common situation where you need to manage multiple Plone sites in the same
-installation.
+This product override Plone's standard view for ZMI root with an overview of available Plone sites.
+
+Features
+========
+
+- Possibility to have an overview about sites or products.
+- In sites list, show which sites needs to upgrade some products, and manage products install/upgrade/uninstall profiles.
+- In products list, show which sites installed a specific product, and manage install/upgrade/uninstall profiles for each site.
+
+
+Installation
+============
+
+Install redturtle.lookup by adding it to your buildout::
+
+    [buildout]
+
+    ...
+
+    eggs =
+        redturtle.lookup
+
+
+and then running ``bin/buildout``
+
 
 How to use
 ==========
 
-It add to your Zope root (*not* to your Plone site root) an additional view called ``@@lookup``.
+You simply need to go to your ZMI's root (for example: http://localhost:8080).
 
-This view displays a detailed table that shows several informations and links to more
-useful Plone features, for every site.
+.. raw:: html
 
-The user can also install/uninstall/upgrade every product, in every site.
+    <video controls src="/docs/lookup.webm">Sorry, your browser doesn't support embedded videos.</video>
 
-.. image:: http://blog.redturtle.it/pypi-images/redturtle-lookup
+
+Development
+===========
+
+There are two main parts:
+
+- api
+- app
+
+Api
+---
+
+Api folder is the folder where there are some api endpoints called from the frontend view to manage sites and products.
+
+App
+---
+
+App folder contains a React app bootstrapped with create-react-app.
+
+The app is bult with sematic-ui framework.
+
+To develop, you need to start a Plone site in background:
+you can use the buildout in this package, or the instance that you want.
+
+In package.json there is a proxy set for 8080 port, so if your instance runs on another port, you need to change that value.
+
+The first time that you develop react app, you need to install its dependencies::
+
+    yarn
+ 
+Then you need to run the dev server::
+
+    yarn start
+   
+To build a new version of the app::
+
+    yarn build
+
+The new build will be automatically seen by the Plone view.
+
+Contribute
+==========
+
+- Issue Tracker: https://github.com/RedTurtle/redturtle.lookup/issues
+- Source Code: https://github.com/RedTurtle/redturtle.lookup
+
+
+License
+=======
+
+The project is licensed under the GPLv2.
+
 
 Authors
 =======

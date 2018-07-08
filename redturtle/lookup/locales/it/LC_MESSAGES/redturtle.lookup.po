@@ -48,7 +48,7 @@ msgstr "Sito aggiornato"
 
 #: ../lookup_products.pt:112
 msgid "Something goes wrong with this product. Try to manage it in portal's control panel"
-msgstr "Si è verificato un errore con questo prodotto. Prova a gestirlo direttamente nel pannello di controllo del portale"
+msgstr "Si è verificato un errore con questo prodotto. lookup a gestirlo direttamente nel pannello di controllo del portale"
 
 #: ../lookup.pt:55
 msgid "Status"

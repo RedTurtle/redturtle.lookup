@@ -19,10 +19,25 @@ class App extends Component<AppProps, AppState> {
       sites: [],
       authenticator: '',
       isLoading: false,
+      error: '',
       retrieveStatus: (): any => {
-        return getStatus().then(data => {
-          return this.setState({ ...this.state, ...data, isLoading: false });
-        });
+        return getStatus()
+          .then(data => {
+            return this.setState({
+              ...this.state,
+              ...data,
+              isLoading: false,
+              error: '',
+            });
+          })
+          .catch(e => {
+            console.error(e.message);
+            this.setState({
+              ...this.state,
+              isLoading: false,
+              error: e.message,
+            });
+          });
       },
     };
   }
@@ -52,13 +67,15 @@ class App extends Component<AppProps, AppState> {
       },
     ];
 
+    const { error } = this.state;
+
     return (
       <LookupContext.Provider value={this.state}>
         <div className="App">
           <TopMenuContainer />
           <Container style={{ marginTop: '7em' }}>
             <Header as="h1"> Plone sites lookup </Header>
-            <Tab panes={panes} />
+            {error.length ? <span>{error}</span> : <Tab panes={panes} />}
           </Container>
         </div>
       </LookupContext.Provider>

@@ -5,7 +5,7 @@ from Products.Five.browser import BrowserView
 class View(BrowserView):
 
     def __call__(self):
-        return self.context.restrictedTraverse('++plone++prova/index.html')
+        return self.context.restrictedTraverse('++plone++lookup/index.html')
 
 
 class ProductInfoView(BrowserView):

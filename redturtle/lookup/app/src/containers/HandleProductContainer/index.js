@@ -77,25 +77,32 @@ class HandleProductContainer extends Component<Props, State> {
           </Dimmer>
         ) : null}
         <List.Content floated="right">
+          {needUpgrade ? (
+            <Button
+              color="orange"
+              onClick={() => this.onHandleProduct({ action: 'upgrade' })}
+            >
+              Upgrade
+            </Button>
+          ) : null}
           {is_installed ? (
             <Button
+              color="red"
               onClick={() => this.onHandleProduct({ action: 'uninstall' })}
             >
               Uninstall
             </Button>
           ) : (
-            <Button onClick={() => this.onHandleProduct({ action: 'install' })}>
+            <Button
+              color="grey"
+              onClick={() => this.onHandleProduct({ action: 'install' })}
+            >
               Install
             </Button>
           )}
-          {needUpgrade ? (
-            <Button onClick={() => this.onHandleProduct({ action: 'upgrade' })}>
-              Upgrade
-            </Button>
-          ) : null}
         </List.Content>
         {needUpgrade ? (
-          <Label color="red">
+          <Label color="orange">
             <Icon name="warning sign" />
             {product.upgrade_info.installedVersion} =>{' '}
             {product.upgrade_info.newVersion}

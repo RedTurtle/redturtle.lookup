@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Item, Label, Segment, Icon } from 'semantic-ui-react';
+import { Item, Label, Segment } from 'semantic-ui-react';
 import type { AppState } from '../../types';
 import ModalContainer from '../../containers/ModalContainer';
 import SitesOverview from '../SitesOverview';
@@ -37,9 +37,10 @@ const ProductsList = ({ products, sites, onUpdateStatus }: Props) => {
 
           const sitesModal = (
             <ModalContainer
-              label={`Installed on ${installedStatus.installed.length}/${
+              buttonLabel={`Installed on ${installedStatus.installed.length}/${
                 sites.length
               } sites`}
+              headerLabel={product.title}
             >
               <SitesOverview
                 {...{ product, sites, installedStatus, onUpdateStatus }}

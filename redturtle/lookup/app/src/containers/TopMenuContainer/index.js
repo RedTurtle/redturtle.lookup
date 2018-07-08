@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
+import { Container, Icon, Image, Menu } from 'semantic-ui-react';
 
 export default class TopMenuContainer extends Component {
   state = {
@@ -38,29 +38,12 @@ export default class TopMenuContainer extends Component {
               style={{ marginRight: '1.5em' }}
             />
           </Menu.Item>
-          <Menu.Item as="a" href="/">
-            Home
-          </Menu.Item>
           <Menu.Item as="a" href="/manage_main">
             ZMI
           </Menu.Item>
-          <Dropdown item simple text="Dropdown">
-            <Dropdown.Menu>
-              <Dropdown.Item>List Item</Dropdown.Item>
-              <Dropdown.Item>List Item</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Header>Header Item</Dropdown.Header>
-              <Dropdown.Item>
-                <i className="dropdown icon" />
-                <span className="text">Submenu</span>
-                <Dropdown.Menu>
-                  <Dropdown.Item>List Item</Dropdown.Item>
-                  <Dropdown.Item>List Item</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown.Item>
-              <Dropdown.Item>List Item</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Menu.Item as="a" href="/@@plone-addsite">
+            <Icon name="add" />Add new site
+          </Menu.Item>
         </Container>
       </Menu>
     );

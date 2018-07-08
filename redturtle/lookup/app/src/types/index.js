@@ -39,6 +39,7 @@ export type AppState = {
   sites: Array<Site>,
   authenticator: string,
   isLoading: boolean,
+  error: string,
   retrieveStatus: () => any,
 };
 
