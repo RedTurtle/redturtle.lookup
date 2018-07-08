@@ -34,8 +34,9 @@ You simply need to go to your ZMI's root (for example: http://localhost:8080).
 
 .. raw:: html
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/q6wfXFosfOo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/q6wfXFosfOo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
 
 Development
 ===========
