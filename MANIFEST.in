@@ -26,3 +26,6 @@ prune var
 prune lib
 prune bin
 prune redturtle/lookup/app/node_modules
+prune redturtle/lookup/app/src
+prune redturtle/lookup/app/public
+prune redturtle/lookup/app/flow-typed

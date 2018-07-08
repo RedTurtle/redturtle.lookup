@@ -1,10 +1,11 @@
 Changelog
 =========
 
-2.5 (unreleased)
-----------------
+3.0.0 (unreleased)
+------------------
 
-- Nothing changed yet.
+- New interface.
+  [cekk]
 
 
 2.4 (2016-10-13)
