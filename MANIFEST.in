@@ -10,7 +10,7 @@ exclude docs/lookup.gif
 global-exclude .DS_Store
 global-exclude *.pyc
 global-exclude *pyc
-
+global-exclude pip-selfcheck.json
 global-include *.mo
 include .editorconfig
 include .gitattributes
