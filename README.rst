@@ -1,14 +1,14 @@
 Introduction
 ============
 
-This product override Plone's standard view for ZMI root with an overview of available Plone sites.
+This product overrides Plone's standard view for ZMI root with an overview of available Plone sites.
 
 Features
 ========
 
 - Possibility to have an overview about sites or products.
-- In sites list, show which sites needs to upgrade some products, and manage products install/upgrade/uninstall profiles.
-- In products list, show which sites installed a specific product, and manage install/upgrade/uninstall profiles for each site.
+- In sites list, show which sites need to upgrade products and let to manage products install/upgrade/uninstall profiles.
+- In products list, show which sites have a specific product installed and let to manage install/upgrade/uninstall profiles for each site.
 
 
 Installation
@@ -30,7 +30,7 @@ and then running ``bin/buildout``
 How to use
 ==========
 
-You simply need to go to your ZMI's root (for example: http://localhost:8080).
+You simply need to go to your ZMI root (for example: http://localhost:8080).
 
 .. image:: https://raw.githubusercontent.com/RedTurtle/redturtle.lookup/master/docs/lookup.gif
 
@@ -72,7 +72,7 @@ To build a new version of the app::
 
     yarn build
 
-The new build will be automatically seen by the Plone view.
+The new build will be automatically seen in the Plone view.
 
 Contribute
 ==========
