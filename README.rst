@@ -32,7 +32,7 @@ How to use
 
 You simply need to go to your ZMI's root (for example: http://localhost:8080).
 
-.. image:: docs/lookup.gif
+.. image:: https://raw.githubusercontent.com/RedTurtle/redturtle.lookup/master/docs/lookup.gif
 
 
 Development
