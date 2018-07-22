@@ -1,0 +1,11 @@
+.ui.dimmer {
+    display: flex !important;
+}
+
+.ui.modals {
+    padding-top: 300px
+}
+
+.ui.modal {
+    margin-top: 0;
+}

@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 
-import LookupContext from './containers/LookupContext';
-import SitesWrapper from './components/SitesWrapper';
-import ProductsWrapper from './components/ProductsWrapper';
+import LookupContext from './Context/LookupContext';
+import SitesPanel from './Site/SitesPanel';
+import ProductsPanel from './Product/ProductsPanel';
 import TopMenuContainer from './containers/TopMenuContainer';
-import type { AppProps, AppState } from './types';
+import type { AppProps, AppState, Product } from './types';
 import { Container } from 'semantic-ui-react';
 import { Header, Tab } from 'semantic-ui-react';
 import { getStatus } from './helpers/apiFetcher';
@@ -39,11 +39,25 @@ class App extends Component<AppProps, AppState> {
             });
           });
       },
+      updateSiteProducts: ({ siteId, products }): any => {
+        this.setState({
+          ...this.state,
+          sites: this.state.sites.map(site => {
+            if (site.id === siteId) {
+              site.products = products;
+            }
+            return site;
+          }),
+          error: '',
+        });
+      },
     };
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
+    this.setState({
+      isLoading: true,
+    });
     this.state.retrieveStatus();
   }
 
@@ -53,7 +67,7 @@ class App extends Component<AppProps, AppState> {
         menuItem: 'Sites',
         render: () => (
           <Tab.Pane>
-            <SitesWrapper />
+            <SitesPanel />
           </Tab.Pane>
         ),
       },
@@ -61,7 +75,7 @@ class App extends Component<AppProps, AppState> {
         menuItem: 'Products',
         render: () => (
           <Tab.Pane>
-            <ProductsWrapper />
+            <ProductsPanel />
           </Tab.Pane>
         ),
       },
@@ -73,11 +87,15 @@ class App extends Component<AppProps, AppState> {
       <LookupContext.Provider value={this.state}>
         <div className="App">
           <TopMenuContainer />
-          <Container style={{ marginTop: '7em' }}>
-            <Header as="h1"> Plone sites lookup </Header>
-            {error.length ? <span>{error}</span> : <Tab panes={panes} />}
-          </Container>
-        </div>
+          <Container
+            style={{
+              marginTop: '7em',
+            }}
+          >
+            <Header as="h1"> Plone sites lookup </Header>{' '}
+            {error.length ? <span> {error} </span> : <Tab panes={panes} />}{' '}
+          </Container>{' '}
+        </div>{' '}
       </LookupContext.Provider>
     );
   }

@@ -8,6 +8,9 @@ from zope.component import getMultiAdapter
 
 import json
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class StatusView(Overview):
 
@@ -21,20 +24,21 @@ class StatusView(Overview):
         }
         for site in self.sites():
             site_url = site.absolute_url()
+            outdated = self.site_is_outdated(site)
             data['sites'].append({
                 'id': site.id,
                 'url': site_url,
                 'title': site.title,
-                'outdated': self.site_is_outdated(site),
+                'outdated': outdated,
                 'upgrade_url': '{0}/@@plone-upgrade'.format(site_url),
-                'products': {
-                    'outdated': self.get_products_infos(
-                        site, 'get_upgrades'),
-                    'installed': self.get_products_infos(
-                        site, 'get_installed'),
-                    'available': self.get_products_infos(
-                        site, 'get_available'),
-                }
+                # 'products': {
+                #     'outdated': self.get_products_infos(
+                #         site, 'get_upgrades'),
+                #     'installed': self.get_products_infos(
+                #         site, 'get_installed'),
+                #     'available': self.get_products_infos(
+                #         site, 'get_available'),
+                # }
 
             })
             if not data['products']:
@@ -49,6 +53,49 @@ class StatusView(Overview):
         if mig is not None:
             return mig.needUpgrading()
         return False
+
+    def get_products_infos(self, site, method):
+        view = api.content.get_view(
+            context=site,
+            name='prefs_install_products_form',
+            request=self.request
+        )
+        res = getattr(view, method, None)()
+        if isinstance(res, dict):
+            asd = map(self.filter_infos, res.values())
+            return asd
+            # return map(self.filter_infos, res.values())
+        asd = map(self.filter_infos, res)
+        return asd
+        # return map(self.filter_infos, res)
+
+    def filter_infos(self, infos):
+        filtered_infos = {}
+        for key, value in infos.items():
+            if key.endswith('_profile') or key.endswith('_profiles'):
+                continue
+            filtered_infos[key] = value
+        return filtered_infos
+
+
+class SiteProductsInfos(BrowserView):
+
+    """Lookup view for product installation.
+    """
+
+    def __call__(self):
+        data = {
+            'outdated': self.get_products_infos(
+                self.context, 'get_upgrades'),
+            'installed': self.get_products_infos(
+                self.context, 'get_installed'),
+            'available': self.get_products_infos(
+                self.context, 'get_available'),
+        }
+        self.request.response.setHeader('Content-type', 'application/json')
+        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
+        return json.dumps(data)
+        return data
 
     def get_products_infos(self, site, method):
         view = api.content.get_view(

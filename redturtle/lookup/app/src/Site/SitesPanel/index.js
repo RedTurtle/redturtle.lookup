@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import LookupContext from '../../containers/LookupContext';
-import SitesList from '../SitesList';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import LookupContext from '../../Context/LookupContext';
+import SiteWrapper from '../SiteWrapper';
+import { Dimmer, Loader, Segment, Item } from 'semantic-ui-react';
 import type { AppState } from '../../types';
 
 type Props = {};
@@ -16,10 +16,11 @@ const SitesPanel = (props: Props) => (
             <Loader>Loading</Loader>
           </Dimmer>
         ) : (
-          <SitesList
-            onUpdateStatus={context.retrieveStatus}
-            sites={context.sites}
-          />
+          <Item.Group divided>
+            {context.sites.map((site, index) => (
+              <SiteWrapper key={index} site={site} context={context} />
+            ))}
+          </Item.Group>
         );
       }}
     </LookupContext.Consumer>
