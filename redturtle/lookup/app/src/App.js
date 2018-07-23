@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 
-import LookupContext from './Context/LookupContext';
-import SitesPanel from './Site/SitesPanel';
-import ProductsPanel from './Product/ProductsPanel';
-import TopMenuContainer from './containers/TopMenuContainer';
-import type { AppProps, AppState, Product } from './types';
+import LookupContext from './context/LookupContext';
+import SitesPanel from './site/SitesPanel';
+import ProductsPanel from './products/ProductsPanel';
+import TopMenuContainer from './layout/TopMenuContainer';
+import type { AppProps, AppState } from './types';
 import { Container } from 'semantic-ui-react';
 import { Header, Tab } from 'semantic-ui-react';
 import { getStatus } from './helpers/apiFetcher';

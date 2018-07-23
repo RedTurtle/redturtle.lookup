@@ -53,7 +53,6 @@ class HandleProductSiteContainer extends Component<Props, State> {
             updateSiteProducts({ siteId, products });
           });
         }
-        return;
       })
       .catch(e => {
         this.setState({

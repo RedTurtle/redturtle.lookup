@@ -181,8 +181,13 @@ class InstallProductView(HandleProductView):
 class UninstallProductView(HandleProductView):
 
     def do_action(self, productId):
-        res = self.support_view.uninstall_product(productId)
-        if not res:
+        qi = api.portal.get_tool('portal_quickinstaller')
+        # we don't use support_view.uninstall_product because it doesn't
+        # uninstall correctly the product
+        # res = self.support_view.uninstall_product(productId)
+        try:
+            qi.uninstallProducts([productId])
+        except Exception as e:
             return {
                 'ok': False,
                 'msg': 'Unable to update this product. See error log'

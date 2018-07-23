@@ -2,7 +2,7 @@
 import React from 'react';
 import { List } from 'semantic-ui-react';
 import type { Product } from '../../types';
-import HandleProductSiteContainer from '../../containers/HandleProductSiteContainer';
+import HandleProductSiteContainer from '../HandleProductSiteContainer';
 
 type Props = {
   product: Product,
