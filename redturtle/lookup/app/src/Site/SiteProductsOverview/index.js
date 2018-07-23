@@ -2,14 +2,14 @@
 import React from 'react';
 import { List } from 'semantic-ui-react';
 import type { Site } from '../../types';
-import HandleProductContainer from '../../containers/HandleProductContainer';
+import HandleProductContainer from '../HandleProductContainer';
 
 type Props = {
   site: Site,
-  onUpdateStatus: () => void,
+  context: $FlowFixMe,
 };
 
-const SiteProductsOverview = ({ site, onUpdateStatus }: Props) => {
+const SiteProductsOverview = ({ site, context }: Props) => {
   if (!site) {
     return '';
   }
@@ -29,7 +29,7 @@ const SiteProductsOverview = ({ site, onUpdateStatus }: Props) => {
                 key={product.id}
                 siteId={site.id}
                 product={product}
-                onUpdateStatus={onUpdateStatus}
+                updateSiteProducts={context.updateSiteProducts}
               />
             ))}
           </List>
@@ -43,7 +43,7 @@ const SiteProductsOverview = ({ site, onUpdateStatus }: Props) => {
             key={product.id}
             siteId={site.id}
             product={product}
-            onUpdateStatus={onUpdateStatus}
+            updateSiteProducts={context.updateSiteProducts}
           />
         ))}
       </List>
@@ -56,7 +56,7 @@ const SiteProductsOverview = ({ site, onUpdateStatus }: Props) => {
                 key={product.id}
                 siteId={site.id}
                 product={product}
-                onUpdateStatus={onUpdateStatus}
+                updateSiteProducts={context.updateSiteProducts}
               />
             ))}
           </List>

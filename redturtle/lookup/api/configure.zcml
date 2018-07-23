@@ -34,4 +34,10 @@
     permission="zope2.ViewManagementScreens"
     class=".view.UninstallProductView"
     />
+  <browser:page
+    name="products-infos"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="zope2.ViewManagementScreens"
+    class=".view.SiteProductsInfos"
+    />
 </configure>

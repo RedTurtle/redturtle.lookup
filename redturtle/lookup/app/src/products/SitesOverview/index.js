@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import type { Product, AppState } from '../../types';
-import HandleProductSiteContainer from '../../containers/HandleProductSiteContainer';
+import type { Product } from '../../types';
+import HandleProductSiteContainer from '../HandleProductSiteContainer';
 
 type Props = {
   product: Product,
@@ -10,19 +10,14 @@ type Props = {
     installed: Array<string>,
     notInstalled: Array<string>,
   },
-  sites: $PropertyType<AppState, 'sites'>,
-  onUpdateStatus: () => void,
+  context: $FlowFixMe,
 };
 
-const SitesOverview = ({
-  product,
-  sites,
-  installedStatus,
-  onUpdateStatus,
-}: Props) => {
+const SitesOverview = ({ product, installedStatus, context }: Props) => {
   if (!product) {
     return '';
   }
+  const { sites } = context;
   const { installed, notInstalled } = installedStatus;
   return (
     <div className="sites">
@@ -49,7 +44,7 @@ const SitesOverview = ({
                   key={id}
                   siteId={id}
                   product={siteProduct}
-                  onUpdateStatus={onUpdateStatus}
+                  updateSiteProducts={context.updateSiteProducts}
                 />
               );
             })}{' '}
@@ -78,7 +73,7 @@ const SitesOverview = ({
                   key={id}
                   siteId={id}
                   product={siteProduct}
-                  onUpdateStatus={onUpdateStatus}
+                  updateSiteProducts={context.updateSiteProducts}
                 />
               );
             })}{' '}

@@ -25,7 +25,15 @@ const fetchApi = (data: ApiData) => {
 };
 
 export const getStatus = () => {
-  return fetchApi({ route: 'status' });
+  return fetchApi({
+    route: 'status',
+  });
+};
+
+export const getSiteProducts = ({ siteId }: { siteId: string }) => {
+  return fetchApi({
+    route: `${siteId}/products-infos`,
+  });
 };
 
 export const handleProduct = ({
@@ -37,7 +45,9 @@ export const handleProduct = ({
   productId: string,
   action: string,
 }): any => {
-  return fetchApi({ route: `${siteId}/generate-authenticator` })
+  return fetchApi({
+    route: `${siteId}/generate-authenticator`,
+  })
     .then(({ authenticator }) => {
       const params = {
         _authenticator: authenticator,

@@ -1,10 +1,13 @@
 Changelog
 =========
 
-3.0.1 (unreleased)
+3.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Refactoring to improve speed when we have several sites with a lot of products.
+  [cekk]
+- Fix uninstall endpoint. Now use portal_quickinstaller to uninstall products properly
+  [cekk]
 
 
 3.0.0 (2018-07-09)
