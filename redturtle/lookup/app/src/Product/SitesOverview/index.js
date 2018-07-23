@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import type { Product, AppState } from '../../types';
+import type { Product } from '../../types';
 import HandleProductSiteContainer from '../../containers/HandleProductSiteContainer';
 
 type Props = {

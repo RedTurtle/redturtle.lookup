@@ -34,7 +34,8 @@ class SiteWrapper extends Component<Props, State> {
   render() {
     const { site, context } = this.props;
     const { isFetchingData } = this.state;
-    const showUpdate = false;
+    const outdated = site.products ? site.products.outdated : null;
+    const showUpdate = outdated && outdated.length > 0;
     const styles = showUpdate
       ? {
           color: showUpdate ? 'orange' : '',
