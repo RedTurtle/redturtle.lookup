@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
-from Products.CMFPlone.browser.admin import Overview
-from Products.Five.browser import BrowserView
 from plone import api  # noqa
 from plone.protect.authenticator import createToken  # noqa
+from Products.CMFPlone.browser.admin import Overview
+from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 
 import json
-
 import logging
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -18,29 +19,27 @@ class StatusView(Overview):
     """
 
     def __call__(self):
-        data = {
-            'sites': [],
-            'products': [],
-        }
+        data = {'sites': [], 'products': []}
         for site in self.sites():
             site_url = site.absolute_url()
             outdated = self.site_is_outdated(site)
-            data['sites'].append({
-                'id': site.id,
-                'url': site_url,
-                'title': site.title,
-                'outdated': outdated,
-                'upgrade_url': '{0}/@@plone-upgrade'.format(site_url),
-                # 'products': {
-                #     'outdated': self.get_products_infos(
-                #         site, 'get_upgrades'),
-                #     'installed': self.get_products_infos(
-                #         site, 'get_installed'),
-                #     'available': self.get_products_infos(
-                #         site, 'get_available'),
-                # }
-
-            })
+            data['sites'].append(
+                {
+                    'id': site.id,
+                    'url': site_url,
+                    'title': site.title,
+                    'outdated': outdated,
+                    'upgrade_url': '{0}/@@plone-upgrade'.format(site_url),
+                    # 'products': {
+                    #     'outdated': self.get_products_infos(
+                    #         site, 'get_upgrades'),
+                    #     'installed': self.get_products_infos(
+                    #         site, 'get_installed'),
+                    #     'available': self.get_products_infos(
+                    #         site, 'get_available'),
+                    # }
+                }
+            )
             if not data['products']:
                 data['products'] = self.get_products_infos(site, 'get_addons')
         self.request.response.setHeader('Content-type', 'application/json')
@@ -58,7 +57,7 @@ class StatusView(Overview):
         view = api.content.get_view(
             context=site,
             name='prefs_install_products_form',
-            request=self.request
+            request=self.request,
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
@@ -85,12 +84,9 @@ class SiteProductsInfos(BrowserView):
 
     def __call__(self):
         data = {
-            'outdated': self.get_products_infos(
-                self.context, 'get_upgrades'),
-            'installed': self.get_products_infos(
-                self.context, 'get_installed'),
-            'available': self.get_products_infos(
-                self.context, 'get_available'),
+            'outdated': self.get_products_infos(self.context, 'get_upgrades'),
+            'installed': self.get_products_infos(self.context, 'get_installed'),
+            'available': self.get_products_infos(self.context, 'get_available'),
         }
         self.request.response.setHeader('Content-type', 'application/json')
         self.request.response.setHeader('Access-Control-Allow-Origin', '*')
@@ -101,7 +97,7 @@ class SiteProductsInfos(BrowserView):
         view = api.content.get_view(
             context=site,
             name='prefs_install_products_form',
-            request=self.request
+            request=self.request,
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
@@ -129,10 +125,10 @@ class GenerateAuthenticatorTokenView(BrowserView):
 
 
 class HandleProductView(BrowserView):
-
     def __call__(self):
         authenticator = getMultiAdapter(
-            (self.context, self.request), name=u'authenticator')
+            (self.context, self.request), name=u'authenticator'
+        )
         if not authenticator.verify():
             raise Unauthorized
         productId = self.request.form.get('productId')
@@ -147,39 +143,36 @@ class HandleProductView(BrowserView):
         return api.content.get_view(
             context=self.context,
             name='prefs_install_products_form',
-            request=self.request
+            request=self.request,
         )
 
 
 class UpgradeProductView(HandleProductView):
-
     def do_action(self, productId):
         res = self.support_view.upgrade_product(productId)
         if not res:
             return {
                 'ok': False,
-                'msg': 'Unable to update this product. See error log'
+                'msg': 'Unable to update this product. See error log',
             }
-        return {'ok': True,
-                'upgrade_info': self.support_view.upgrade_info(productId)
-                }
+        return {
+            'ok': True,
+            'upgrade_info': self.support_view.upgrade_info(productId),
+        }
 
 
 class InstallProductView(HandleProductView):
-
     def do_action(self, productId):
         res = self.support_view.install_product(productId)
         if not res:
             return {
                 'ok': False,
-                'msg': 'Unable to update this product. See error log'
+                'msg': 'Unable to update this product. See error log',
             }
-        return {'ok': True,
-                }
+        return {'ok': True}
 
 
 class UninstallProductView(HandleProductView):
-
     def do_action(self, productId):
         qi = api.portal.get_tool('portal_quickinstaller')
         # we don't use support_view.uninstall_product because it doesn't
@@ -187,10 +180,9 @@ class UninstallProductView(HandleProductView):
         # res = self.support_view.uninstall_product(productId)
         try:
             qi.uninstallProducts([productId])
-        except Exception as e:
+        except Exception:
             return {
                 'ok': False,
-                'msg': 'Unable to update this product. See error log'
+                'msg': 'Unable to update this product. See error log',
             }
-        return {'ok': True,
-                }
+        return {'ok': True}
