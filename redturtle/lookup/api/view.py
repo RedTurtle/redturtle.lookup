@@ -85,8 +85,12 @@ class SiteProductsInfos(BrowserView):
     def __call__(self):
         data = {
             'outdated': self.get_products_infos(self.context, 'get_upgrades'),
-            'installed': self.get_products_infos(self.context, 'get_installed'),
-            'available': self.get_products_infos(self.context, 'get_available'),
+            'installed': self.get_products_infos(
+                self.context, 'get_installed'
+            ),  # noqa
+            'available': self.get_products_infos(
+                self.context, 'get_available'
+            ),  # noqa
         }
         self.request.response.setHeader('Content-type', 'application/json')
         self.request.response.setHeader('Access-Control-Allow-Origin', '*')
