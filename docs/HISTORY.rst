@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.0 (unreleased)
+3.1.0 (2019-02-11)
 ------------------
 
 - Refactoring to improve speed when we have several sites with a lot of products.
