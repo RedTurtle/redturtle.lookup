@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 
 import LookupContext from './Context/LookupContext';
+import CachePanel from './Site/CachePanel';
 import SitesPanel from './Site/SitesPanel';
 import ProductsPanel from './products/ProductsPanel';
 import TopMenuContainer from './layout/TopMenuContainer';
@@ -76,6 +77,14 @@ class App extends Component<AppProps, AppState> {
         render: () => (
           <Tab.Pane>
             <ProductsPanel />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: 'Cache Infos',
+        render: () => (
+          <Tab.Pane>
+            <CachePanel />
           </Tab.Pane>
         ),
       },

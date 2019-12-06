@@ -31,7 +31,7 @@ class View(BrowserView):
         configuration = getConfiguration()
         names = configuration.dbtab.listDatabaseNames()
         results = []
-        for name in names:
+        for name in sorted(names):
             if name in self.context:
                 site = self.context[name]
                 db = site._p_jar.db()
@@ -40,8 +40,8 @@ class View(BrowserView):
                         'id': name,
                         'title': site.Title(),
                         'objects': db.objectCount(),
-                        'actualCacheSize': db.getCacheSize(),
-                        'cacheSize': db.cacheSize(),
+                        'maxCacheSize': db.getCacheSize(),
+                        'actualCacheSize': db.cacheSize(),
                         'tot': int(db.cacheSize() / db.getCacheSize() * 1000.0)
                         / 10,
                     }

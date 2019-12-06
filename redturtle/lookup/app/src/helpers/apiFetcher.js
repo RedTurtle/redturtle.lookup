@@ -30,6 +30,12 @@ export const getStatus = () => {
   });
 };
 
+export const getCacheInfos = () => {
+  return fetchApi({
+    route: 'cache-infos',
+  });
+};
+
 export const getSiteProducts = ({ siteId }: { siteId: string }) => {
   return fetchApi({
     route: `${siteId}/products-infos`,
