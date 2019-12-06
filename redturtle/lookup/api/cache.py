@@ -27,37 +27,23 @@ class View(BrowserView):
         self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps(data)
 
-    def sites(self, root=None):
-        if root is None:
-            root = self.context
-
-        result = []
-        secman = getSecurityManager()
-        for obj in root.values():
-            if obj.meta_type is 'Folder':
-                result = result + self.sites(obj)
-            elif IPloneSiteRoot.providedBy(obj):
-                if secman.checkPermission(View, obj):
-                    result.append(obj)
-            elif obj.getId() in getattr(root, '_mount_points', {}):
-                result.extend(self.sites(root=obj))
-        return result
-
-    def get_cache_infos(self):        
-        import pdb;pdb.set_trace()
+    def get_cache_infos(self):
         configuration = getConfiguration()
         names = configuration.dbtab.listDatabaseNames()
-        result = []
-        sites = self.sites()
+        results = []
         for name in names:
-            if name in app:
-                db = app[name]._p_jar.db()
-                print '{}\t{}\t{}\t{}\t{}'.format(
-                    name,
-                    db.objectCount(),
-                    db.getCacheSize(),
-                    db.cacheSize(),
-                    # db.getCacheSizeBytes(),
-                    # db.cacheDetailSize(),
-                    int(db.cacheSize() / db.getCacheSize() * 1000.0) / 10
+            if name in self.context:
+                site = self.context[name]
+                db = site._p_jar.db()
+                results.append(
+                    {
+                        'id': name,
+                        'title': site.Title(),
+                        'objects': db.objectCount(),
+                        'actualCacheSize': db.getCacheSize(),
+                        'cacheSize': db.cacheSize(),
+                        'tot': int(db.cacheSize() / db.getCacheSize() * 1000.0)
+                        / 10,
+                    }
                 )
+        return results
