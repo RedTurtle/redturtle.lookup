@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Item, Label, Segment, Icon, Loader } from 'semantic-ui-react';
 import type { Site, AppState } from '../../types';
 import ModalContainer from '../../misc/ModalContainer';
-import LookupContext from '../../context/LookupContext';
+import LookupContext from '../../Context/LookupContext';
 import SiteProductsOverview from '../SiteProductsOverview';
 import { getSiteProducts } from '../../helpers/apiFetcher';
 

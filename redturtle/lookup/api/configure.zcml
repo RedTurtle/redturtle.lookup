@@ -40,4 +40,10 @@
     permission="zope2.ViewManagementScreens"
     class=".view.SiteProductsInfos"
     />
+  <browser:page
+    name="cache-infos"
+    for="OFS.interfaces.IApplication"
+    permission="zope2.ViewManagementScreens"
+    class=".cache.View"
+    />
 </configure>

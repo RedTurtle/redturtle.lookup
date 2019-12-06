@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 
-import LookupContext from './context/LookupContext';
-import SitesPanel from './site/SitesPanel';
+import LookupContext from './Context/LookupContext';
+import SitesPanel from './Site/SitesPanel';
 import ProductsPanel from './products/ProductsPanel';
 import TopMenuContainer from './layout/TopMenuContainer';
 import type { AppProps, AppState } from './types';

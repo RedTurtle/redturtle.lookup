@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import LookupContext from '../../context/LookupContext';
+import LookupContext from '../../Context/LookupContext';
 import ProductWrapper from '../ProductWrapper';
 import { Dimmer, Loader, Segment, Item } from 'semantic-ui-react';
 import type { AppState } from '../../types';
