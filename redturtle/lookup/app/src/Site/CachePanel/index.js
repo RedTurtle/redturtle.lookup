@@ -66,10 +66,10 @@ const CachePanel = (props: Props) => {
               Max cache size
             </Table.HeaderCell>
             <Table.HeaderCell
-              sorted={sortedColumn === 'tot' ? sortDirection : null}
-              onClick={handleSort('tot')}
+              sorted={sortedColumn === 'percentage' ? sortDirection : null}
+              onClick={handleSort('percentage')}
             >
-              TOT
+              %
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -81,7 +81,7 @@ const CachePanel = (props: Props) => {
               <Table.Cell>{formatNumber(site.objects)}</Table.Cell>
               <Table.Cell>{formatNumber(site.actualCacheSize)}</Table.Cell>
               <Table.Cell>{formatNumber(site.maxCacheSize)}</Table.Cell>
-              <Table.Cell>{site.tot}</Table.Cell>
+              <Table.Cell>{site.percentage}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

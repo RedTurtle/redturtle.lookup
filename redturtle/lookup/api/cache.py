@@ -42,7 +42,9 @@ class View(BrowserView):
                         'objects': db.objectCount(),
                         'maxCacheSize': db.getCacheSize(),
                         'actualCacheSize': db.cacheSize(),
-                        'tot': int(db.cacheSize() / db.getCacheSize() * 1000.0)
+                        'percentage': int(
+                            db.cacheSize() / db.getCacheSize() * 1000.0
+                        )
                         / 10,
                     }
                 )

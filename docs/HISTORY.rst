@@ -1,10 +1,11 @@
 Changelog
 =========
 
-3.1.1 (unreleased)
+3.2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add cache-info endpoint and data visualization.
+  [cekk]
 
 
 3.1.0 (2019-02-11)
