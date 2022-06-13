@@ -45,7 +45,6 @@ class StatusView(Overview):
         self.request.response.setHeader('Content-type', 'application/json')
         self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps(data)
-        return data
 
     def site_is_outdated(self, site):
         mig = site.get('portal_migration', None)
@@ -61,12 +60,10 @@ class StatusView(Overview):
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
-            asd = map(self.filter_infos, res.values())
-            return asd
-            # return map(self.filter_infos, res.values())
-        asd = map(self.filter_infos, res)
-        return asd
-        # return map(self.filter_infos, res)
+            infos = map(self.filter_infos, res.values())
+        else:
+            infos = map(self.filter_infos, res)
+        return list(infos)
 
     def filter_infos(self, infos):
         filtered_infos = {}
@@ -105,8 +102,10 @@ class SiteProductsInfos(BrowserView):
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
-            return map(self.filter_infos, res.values())
-        return map(self.filter_infos, res)
+            infos = map(self.filter_infos, res.values())
+        else:
+            infos = map(self.filter_infos, res)
+        return list(infos)
 
     def filter_infos(self, infos):
         filtered_infos = {}
