@@ -4,7 +4,8 @@ Changelog
 3.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Python3 compatibility.
+  [foxtrot-dfm1]
 
 
 3.1.0 (2019-02-11)
