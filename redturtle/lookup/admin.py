@@ -13,4 +13,4 @@ class AppTraverser(AppTraverserBase):
             return self.context.restrictedTraverse(
                 '++plone++lookup/index.html'
             )
-        return super().publishTraverse(self, request, name)
+        return super().publishTraverse(request, name)
