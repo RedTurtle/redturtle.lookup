@@ -45,7 +45,6 @@ class StatusView(Overview):
         self.request.response.setHeader('Content-type', 'application/json')
         self.request.response.setHeader('Access-Control-Allow-Origin', '*')
         return json.dumps(data)
-        return data
 
     def site_is_outdated(self, site):
         mig = site.get('portal_migration', None)
