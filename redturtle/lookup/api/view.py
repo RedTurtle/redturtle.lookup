@@ -15,21 +15,20 @@ logger = logging.getLogger(__name__)
 
 class StatusView(Overview):
 
-    """Lookup view for product installation.
-    """
+    """Lookup view for product installation."""
 
     def __call__(self):
-        data = {'sites': [], 'products': []}
+        data = {"sites": [], "products": []}
         for site in self.sites():
             site_url = site.absolute_url()
             outdated = self.site_is_outdated(site)
-            data['sites'].append(
+            data["sites"].append(
                 {
-                    'id': site.id,
-                    'url': site_url,
-                    'title': site.title,
-                    'outdated': outdated,
-                    'upgrade_url': '{0}/@@plone-upgrade'.format(site_url),
+                    "id": site.id,
+                    "url": site_url,
+                    "title": site.title,
+                    "outdated": outdated,
+                    "upgrade_url": "{0}/@@plone-upgrade".format(site_url),
                     # 'products': {
                     #     'outdated': self.get_products_infos(
                     #         site, 'get_upgrades'),
@@ -40,15 +39,15 @@ class StatusView(Overview):
                     # }
                 }
             )
-            if not data['products']:
-                data['products'] = self.get_products_infos(site, 'get_addons')
-        self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
+            if not data["products"]:
+                data["products"] = self.get_products_infos(site, "get_addons")
+        self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
         return json.dumps(data)
         return data
 
     def site_is_outdated(self, site):
-        mig = site.get('portal_migration', None)
+        mig = site.get("portal_migration", None)
         if mig is not None:
             return mig.needUpgrading()
         return False
@@ -56,22 +55,22 @@ class StatusView(Overview):
     def get_products_infos(self, site, method):
         view = api.content.get_view(
             context=site,
-            name='prefs_install_products_form',
+            name="prefs_install_products_form",
             request=self.request,
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
-            asd = map(self.filter_infos, res.values())
+            asd = list(map(self.filter_infos, res.values()))
             return asd
             # return map(self.filter_infos, res.values())
-        asd = map(self.filter_infos, res)
+        asd = list(map(self.filter_infos, res))
         return asd
         # return map(self.filter_infos, res)
 
     def filter_infos(self, infos):
         filtered_infos = {}
         for key, value in infos.items():
-            if key.endswith('_profile') or key.endswith('_profiles'):
+            if key.endswith("_profile") or key.endswith("_profiles"):
                 continue
             filtered_infos[key] = value
         return filtered_infos
@@ -79,39 +78,34 @@ class StatusView(Overview):
 
 class SiteProductsInfos(BrowserView):
 
-    """Lookup view for product installation.
-    """
+    """Lookup view for product installation."""
 
     def __call__(self):
         data = {
-            'outdated': self.get_products_infos(self.context, 'get_upgrades'),
-            'installed': self.get_products_infos(
-                self.context, 'get_installed'
-            ),  # noqa
-            'available': self.get_products_infos(
-                self.context, 'get_available'
-            ),  # noqa
+            "outdated": self.get_products_infos(self.context, "get_upgrades"),
+            "installed": self.get_products_infos(self.context, "get_installed"),  # noqa
+            "available": self.get_products_infos(self.context, "get_available"),  # noqa
         }
-        self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
+        self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
         return json.dumps(data)
         return data
 
     def get_products_infos(self, site, method):
         view = api.content.get_view(
             context=site,
-            name='prefs_install_products_form',
+            name="prefs_install_products_form",
             request=self.request,
         )
         res = getattr(view, method, None)()
         if isinstance(res, dict):
-            return map(self.filter_infos, res.values())
-        return map(self.filter_infos, res)
+            return list(map(self.filter_infos, res.values()))
+        return list(map(self.filter_infos, res))
 
     def filter_infos(self, infos):
         filtered_infos = {}
         for key, value in infos.items():
-            if key.endswith('_profile') or key.endswith('_profiles'):
+            if key.endswith("_profile") or key.endswith("_profiles"):
                 continue
             filtered_infos[key] = value
         return filtered_infos
@@ -119,34 +113,33 @@ class SiteProductsInfos(BrowserView):
 
 class GenerateAuthenticatorTokenView(BrowserView):
 
-    """Generate token for authenticator
-    """
+    """Generate token for authenticator"""
 
     def __call__(self):
-        self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
-        return json.dumps({'authenticator': createToken()})
+        self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
+        return json.dumps({"authenticator": createToken()})
 
 
 class HandleProductView(BrowserView):
     def __call__(self):
         authenticator = getMultiAdapter(
-            (self.context, self.request), name=u'authenticator'
+            (self.context, self.request), name="authenticator"
         )
         if not authenticator.verify():
             raise Unauthorized
-        productId = self.request.form.get('productId')
+        productId = self.request.form.get("productId")
         res = self.do_action(productId)
 
-        self.request.response.setHeader('Content-type', 'application/json')
-        self.request.response.setHeader('Access-Control-Allow-Origin', '*')
+        self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader("Access-Control-Allow-Origin", "*")
         return json.dumps(res)
 
     @property
     def support_view(self):
         return api.content.get_view(
             context=self.context,
-            name='prefs_install_products_form',
+            name="prefs_install_products_form",
             request=self.request,
         )
 
@@ -156,12 +149,12 @@ class UpgradeProductView(HandleProductView):
         res = self.support_view.upgrade_product(productId)
         if not res:
             return {
-                'ok': False,
-                'msg': 'Unable to update this product. See error log',
+                "ok": False,
+                "msg": "Unable to update this product. See error log",
             }
         return {
-            'ok': True,
-            'upgrade_info': self.support_view.upgrade_info(productId),
+            "ok": True,
+            "upgrade_info": self.support_view.upgrade_info(productId),
         }
 
 
@@ -170,15 +163,15 @@ class InstallProductView(HandleProductView):
         res = self.support_view.install_product(productId)
         if not res:
             return {
-                'ok': False,
-                'msg': 'Unable to update this product. See error log',
+                "ok": False,
+                "msg": "Unable to update this product. See error log",
             }
-        return {'ok': True}
+        return {"ok": True}
 
 
 class UninstallProductView(HandleProductView):
     def do_action(self, productId):
-        qi = api.portal.get_tool('portal_quickinstaller')
+        qi = api.portal.get_tool("portal_quickinstaller")
         # we don't use support_view.uninstall_product because it doesn't
         # uninstall correctly the product
         # res = self.support_view.uninstall_product(productId)
@@ -186,7 +179,7 @@ class UninstallProductView(HandleProductView):
             qi.uninstallProducts([productId])
         except Exception:
             return {
-                'ok': False,
-                'msg': 'Unable to update this product. See error log',
+                "ok": False,
+                "msg": "Unable to update this product. See error log",
             }
-        return {'ok': True}
+        return {"ok": True}

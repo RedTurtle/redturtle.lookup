@@ -7,10 +7,7 @@ from zope.publisher.interfaces import IRequest
 
 @adapter(ILookupMarkerInterface, IRequest)
 class AppTraverser(AppTraverserBase):
-
     def publishTraverse(self, request, name):
-        if name == 'index_html':
-            return self.context.restrictedTraverse(
-                '++plone++lookup/index.html'
-            )
-        return AppTraverserBase.publishTraverse(self, request, name)
+        if name == "index_html":
+            return self.context.restrictedTraverse("++plone++lookup/index.html")
+        return super().publishTraverse(request, name)
